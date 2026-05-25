@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이태훈 — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --accent: #00e5a0;
+    --accent2: #7c5cfc;
+    --text: #f0f0f0;
+    --muted: #888;
+    --border: rgba(255,255,255,0.08);
+    --card-bg: #141414;
+    --tag-bg: rgba(0,229,160,0.08);
+    --tag-border: rgba(0,229,160,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── SECTIONS ─── */
+  section { position: relative; z-index: 1; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,229,160,0.07) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,92,252,0.06) 0%, transparent 70%);
+    bottom: 0; left: 200px;
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid var(--tag-border);
+    background: var(--tag-bg);
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+  .hero-name {
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .contact-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Space Mono', monospace;
+  }
+  .contact-chip:hover { color: var(--accent); border-color: var(--tag-border); }
+  .contact-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 3rem;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+  .section-heading {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  .about-text {
+    color: #bbb;
+    font-size: 15px;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .strength-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .strength-item {
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .strength-item:hover { border-color: rgba(0,229,160,0.3); }
+  .strength-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-family: 'Space Mono', monospace;
+  }
+  .strength-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── SKILLS ─── */
+  #skills {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .skill-group { }
+  .skill-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: #ccc;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--tag-border); color: var(--accent); }
+  .skill-tag.primary { border-color: var(--tag-border); color: var(--accent); background: var(--tag-bg); }
+
+  /* ─── PROJECTS ─── */
+  #projects {
+    padding: 6rem 3rem;
+  }
+  .projects-header { max-width: 1100px; margin: 0 auto; }
+  .projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    border-top: 1px solid var(--border);
+    padding: 3rem 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    cursor: default;
+  }
+  .project-card:last-child { border-bottom: 1px solid var(--border); }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .project-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .project-title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+  .project-type {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .project-type.team { background: rgba(124,92,252,0.15); color: #a68fff; border: 1px solid rgba(124,92,252,0.3); }
+  .project-type.solo { background: rgba(0,229,160,0.1); color: var(--accent); border: 1px solid var(--tag-border); }
+  .project-period {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .project-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.2s;
+  }
+  .project-link:hover { color: var(--accent); border-color: var(--tag-border); }
+  .project-link svg { width: 14px; height: 14px; }
+
+  .project-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: #bbb;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .project-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .project-feature {
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .project-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .stack-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .stack-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: #aaa;
+    font-family: 'Space Mono', monospace;
+  }
+  .stack-tag.be { border-color: rgba(59,130,246,0.3); color: #7ab3f7; }
+  .stack-tag.fe { border-color: rgba(124,92,252,0.3); color: #a68fff; }
+  .stack-tag.infra { border-color: rgba(0,229,160,0.25); color: var(--accent); }
+  .stack-tag.engine { border-color: rgba(251,191,36,0.3); color: #fbbf24; }
+
+  /* ─── AWARD ─── */
+  #award {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .award-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    padding: 2rem 2.5rem;
+    border-radius: 4px;
+    margin-top: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .award-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+  .award-icon {
+    font-size: 40px;
+    flex-shrink: 0;
+  }
+  .award-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  .award-desc { font-size: 14px; color: var(--muted); }
+  .award-badge {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid var(--tag-border);
+    background: var(--tag-bg);
+    padding: 6px 14px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* ─── MODAL ─── */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: #141414;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 780px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(12px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.25rem 0;
+    background: #141414;
+    z-index: 10;
+  }
+  .modal-close button {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close button:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .modal-body { padding: 1rem 2rem 2rem; }
+  .modal-tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; align-items: center; }
+  .modal-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .modal-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; font-family: 'Space Mono', monospace; }
+  .modal-section { margin-bottom: 1.75rem; }
+  .modal-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-desc { font-size: 14px; color: #bbb; line-height: 1.85; font-weight: 300; }
+  .modal-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .modal-feature-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-feature-item::before { content: '▸'; color: var(--accent); font-size: 10px; }
+  .modal-stack-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modal-challenge {
+    background: var(--bg3);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .modal-challenge strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 13px; }
+  .modal-link-row { display: flex; gap: 10px; margin-top: 1.5rem; }
+  .modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid;
+  }
+  .modal-btn.primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+  .modal-btn.primary:hover { background: #00c585; border-color: #00c585; }
+  .modal-btn.outline { color: var(--muted); border-color: var(--border); background: none; }
+  .modal-btn.outline:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  /* project card hover */
+  .project-card {
+    transition: background 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  .project-card:hover { background: rgba(255,255,255,0.02); }
+  .project-card .click-hint {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-top: 1rem;
+  }
+  .project-card:hover .click-hint { opacity: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  footer span { color: var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    animation: fadeUp 0.7s ease both;
+  }
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.2s; }
+  .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .hero-name { font-size: 48px; }
+    #about, #skills, #award { padding: 4rem 1.5rem; }
+    #projects { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .project-body { grid-template-columns: 1fr; }
+    .project-header { flex-direction: column; gap: 1rem; }
+    .section-divider { margin: 0 1.5rem; }
+    .award-card { flex-direction: column; text-align: center; }
+    .award-card::before { width: 100%; height: 3px; }
+    .award-badge { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LEE_TAEHOON.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#award">수상</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag fade-in">Software Developer</div>
+    <h1 class="hero-name fade-in">
+      이<span class="accent">태</span>훈
+    </h1>
+    <p class="hero-sub fade-in">
+      빠르고 심도있는 학습을 하는 생성형 생체지능 모델.<br>
+      게임 개발부터 풀스택 웹 서비스까지, 다양한 분야를 아우르는 개발자입니다.
+    </p>
+    <div class="hero-contacts fade-in">
+      <a class="contact-chip" href="tel:010-8220-3350">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        010-8220-3350
+      </a>
+      <a class="contact-chip" href="mailto:xoxohoon01@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        xoxohoon01@gmail.com
+      </a>
+      <a class="contact-chip" href="https://github.com/xoxohoon01" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <span class="contact-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        경기도 고양시 일산서구
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="section-heading">성장 과정 &amp; 강점</h2>
+
+  <div class="about-grid">
+    <div>
+      <p class="about-text">
+        사람들에게 새로운 경험을 나눠주는 것이 목표이자 꿈입니다. 어린 시절 게임을 통해 새로운 경험의 가능성을 발견하고, 게임 개발을 시작하며 소프트웨어 세계에 입문했습니다.
+      </p>
+      <br>
+      <p class="about-text">
+        소프트웨어학과에서 C, C++, Java, Python, Kotlin 등 다양한 언어를 학습하며 컴퓨터 사고 능력을 키웠습니다. 이후 게임 개발 부트캠프에서 객체지향 프로그래밍, Unity 게임 개발, 팀 프로젝트 협업을 경험하며 팀장으로 우수상을 수상했습니다.
+      </p>
+      <br>
+      <p class="about-text">
+        빅데이터 기반 IoT 클라우드 서비스 교육을 통해 하드웨어 시스템 개발, 네트워킹, DBMS 등 기술 스펙트럼을 확장했으며 Java Spring Boot 기반 웹 서비스 백엔드 개발자로도 참여해 MVC 패턴, REST API, 트랜잭션 역량을 강화했습니다.
+      </p>
+    </div>
+
+    <div class="strength-list">
+      <div class="strength-item">
+        <div class="strength-title">프로그램 구조 이해</div>
+        <div class="strength-desc">C부터 Java까지 여러 언어를 통해 소프트웨어 공학적으로 학습. 코드 분석, 유지보수, 구조 설계에 강합니다.</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-title">리더십 &amp; 소통</div>
+        <div class="strength-desc">4번의 소규모 팀 프로젝트에서 팀장 역할. 역할 분담, 명확한 커뮤니케이션으로 우수상 수상 경험.</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-title">클린 코드 지향</div>
+        <div class="strength-desc">명시적 주석, 재사용성 극대화. 코드 리뷰가 수월하고 유지보수에서 강점을 발휘합니다.</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-title">빠른 기술 흡수</div>
+        <div class="strength-desc">폭넓은 경험을 바탕으로 새로운 라이브러리와 디자인 패턴을 빠르게 학습하고 응용합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2 class="section-heading">기술 스택</h2>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">프로그래밍 언어</div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">C#</span>
+        <span class="skill-tag primary">Java</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">HTML</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">게임 엔진</div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">Unity</span>
+        <span class="skill-tag">Game Maker</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">프레임워크</div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">Spring Boot</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">NGO (Netcode)</span>
+        <span class="skill-tag">FacePunch</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">데이터 &amp; 인프라</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">JSON</span>
+        <span class="skill-tag">REST API</span>
+        <span class="skill-tag">MVC 패턴</span>
+        <span class="skill-tag">TCP/IP</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">협업 &amp; 프로젝트 관리</div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">GitHub</span>
+        <span class="skill-tag">Notion</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">Steamworks SDK</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header">
+    <div class="section-label">Projects</div>
+    <h2 class="section-heading">프로젝트</h2>
+  </div>
+
+  <div class="projects-container">
+
+    <!-- Project 1: Path Note -->
+    <div class="project-card" onclick="openModal('pathnote')">
+      <div class="project-header">
+        <div>
+          <div class="project-num">01 / 03</div>
+          <div class="project-title">Path Note</div>
+          <div class="project-meta">
+            <span class="project-type team">팀 프로젝트</span>
+            <span class="project-period">2025.08 — 2025.10</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/Team-115" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Team-115
+        </a>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">
+            데이트 및 여행 코스를 사용자가 직접 설계하고 공유하는 SNS형 플랫폼 웹 서비스. 사진·글·해시태그로 코스를 공유하고, 좋아요·댓글로 소통하며, 찜 목록과 맞춤 추천 기능을 제공합니다.
+          </p>
+          <div class="project-features">
+            <span class="project-feature">코스 설계 &amp; 공유</span>
+            <span class="project-feature">좋아요 &amp; 댓글</span>
+            <span class="project-feature">찜 목록</span>
+            <span class="project-feature">코스 추천</span>
+            <span class="project-feature">카카오 로그인</span>
+            <span class="project-feature">RESTful API</span>
+            <span class="project-feature">MVC 패턴</span>
+            <span class="project-feature">트랜잭션</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <div>
+            <div class="stack-label">Backend</div>
+            <div class="stack-tags">
+              <span class="stack-tag be">Java</span>
+              <span class="stack-tag be">Spring Boot</span>
+              <span class="stack-tag be">Spring Security</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">Frontend</div>
+            <div class="stack-tags">
+              <span class="stack-tag fe">React</span>
+              <span class="stack-tag fe">HTML</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">인프라</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">Git</span>
+              <span class="stack-tag infra">GitHub</span>
+              <span class="stack-tag infra">Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
+    </div>
+
+    <!-- Project 2: Living In Research -->
+    <div class="project-card" onclick="openModal('lir')">
+      <div class="project-header">
+        <div>
+          <div class="project-num">02 / 03</div>
+          <div class="project-title">Living In Research</div>
+          <div class="project-meta">
+            <span class="project-type solo">개인 프로젝트</span>
+            <span class="project-period">2025.09 — 진행 중</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://black-d-og.itch.io/living-in-research" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          itch.io
+        </a>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">
+            Unity 6 기반 멀티플레이어 크래프팅 생존 게임. Steamworks API를 활용한 P2P 네트워킹, FSM 기반 AI, Grid 방식 하우징 시스템, 네트워크 동기화 인벤토리 등 고난도 기술을 직접 구현했습니다.
+          </p>
+          <div class="project-features">
+            <span class="project-feature">스토리 &amp; 퀘스트</span>
+            <span class="project-feature">자원 수집 &amp; 제작</span>
+            <span class="project-feature">기지 건설 (Grid)</span>
+            <span class="project-feature">몬스터 전투</span>
+            <span class="project-feature">Steam P2P 멀티</span>
+            <span class="project-feature">FSM AI</span>
+            <span class="project-feature">네트워크 동기화 인벤토리</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <div>
+            <div class="stack-label">언어</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">C#</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">엔진 &amp; SDK</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">Unity 6</span>
+              <span class="stack-tag engine">Steamworks</span>
+              <span class="stack-tag engine">NGO</span>
+              <span class="stack-tag engine">FacePunch</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">아키텍처</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">싱글톤</span>
+              <span class="stack-tag infra">FSM</span>
+              <span class="stack-tag infra">Object Pooling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
+    </div>
+
+    <!-- Project 3: Fortune Heroes -->
+    <div class="project-card" onclick="openModal('fortune')">
+      <div class="project-header">
+        <div>
+          <div class="project-num">03 / 03</div>
+          <div class="project-title">Fortune Heroes</div>
+          <div class="project-meta">
+            <span class="project-type solo">개인 프로젝트</span>
+            <span class="project-period">2025.02 — 2025.03</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/xoxohoon01/Fortune-Hero" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">
+            Unity 3D 기반 모바일 방치형 RPG 게임. Google Sheets(UGS)를 활용한 데이터 관리, Object Pooling, Addressables, 동적 UI 생성 등 다양한 Unity 기술을 직접 설계하고 구현했습니다.
+          </p>
+          <div class="project-features">
+            <span class="project-feature">자동 전투 스테이지</span>
+            <span class="project-feature">영웅 육성 &amp; 강화</span>
+            <span class="project-feature">아이템 파밍</span>
+            <span class="project-feature">Object Pooling</span>
+            <span class="project-feature">UGS 데이터 관리</span>
+            <span class="project-feature">Addressables</span>
+            <span class="project-feature">동적 UI 생성</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <div>
+            <div class="stack-label">언어 &amp; 엔진</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">C#</span>
+              <span class="stack-tag engine">Unity 2022</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">데이터</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">UGS</span>
+              <span class="stack-tag infra">Google Sheets</span>
+              <span class="stack-tag infra">JSON</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">기술</div>
+            <div class="stack-tags">
+              <span class="stack-tag">Addressables</span>
+              <span class="stack-tag">Object Pooling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- AWARD -->
+<section id="award">
+  <div class="section-label">Award</div>
+  <h2 class="section-heading">수상</h2>
+  <div class="award-card">
+    <div class="award-icon">🏆</div>
+    <div>
+      <div class="award-title">부트캠프 최종 프로젝트 우수상</div>
+      <div class="award-desc">게임 개발 부트캠프 팀 프로젝트 Soul Taker — Unity 3D 모바일 어드벤처 RPG 게임. 팀장으로 참여하여 우수상 수상.</div>
+    </div>
+    <div class="award-badge">EXCELLENCE AWARD</div>
+  </div>
+</section>
+
+<!-- MODAL BACKDROP -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOnBackdrop(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-close">
+      <button onclick="closeModal()" aria-label="닫기">✕</button>
+    </div>
+    <div class="modal-body" id="modalContent"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <p>이태훈 &nbsp;·&nbsp; <span>xoxohoon01@gmail.com</span> &nbsp;·&nbsp; <a href="https://github.com/xoxohoon01" target="_blank" style="color:var(--accent);text-decoration:none;">github.com/xoxohoon01</a></p>
+</footer>
+
+<script>
+  // ── 프로젝트 데이터 ──
+  const projects = {
+    pathnote: {
+      title: 'Path Note',
+      subtitle: '데이트 코스 공유 플랫폼 웹 서비스',
+      type: 'team',
+      typeLabel: '팀 프로젝트',
+      period: '2025.08.13 — 2025.10.01',
+      role: '팀장 · 백엔드 개발자',
+      github: 'https://github.com/Team-115',
+      githubLabel: 'Team-115',
+      desc: `사용자가 데이트 및 여행 코스를 직접 설계하고 SNS처럼 공유할 수 있는 웹 플랫폼입니다. 사진·글·해시태그로 코스를 공유하고, 좋아요·댓글로 소통하며, 찜 목록과 지역·테마·상황별 코스 추천 기능을 제공합니다.\n\n팀장 및 백엔드 개발자로서 REST API 설계 및 구현, Spring Security 기반 카카오 소셜 로그인, 서비스 로직 구현을 담당했습니다. MVC 패턴과 트랜잭션 처리에 대한 실무 역량을 강화할 수 있었습니다.`,
+      features: ['코스 설계 & 공유', '좋아요 & 댓글', '찜 목록', '코스 추천', '카카오 로그인', 'RESTful API', 'MVC 패턴', '트랜잭션 처리', 'Spring Security'],
+      stacks: [
+        { label: 'Backend', tags: [{ text: 'Java', cls: 'be' }, { text: 'Spring Boot', cls: 'be' }, { text: 'Spring Security', cls: 'be' }] },
+        { label: 'Frontend', tags: [{ text: 'React', cls: 'fe' }, { text: 'HTML', cls: 'fe' }] },
+        { label: '데이터', tags: [{ text: 'Python', cls: '' }, { text: 'REST API', cls: 'infra' }] },
+        { label: '협업', tags: [{ text: 'Git', cls: 'infra' }, { text: 'GitHub', cls: 'infra' }, { text: 'Figma', cls: '' }] },
+      ],
+      challenges: [
+        { title: 'REST API 설계', desc: 'Spring Boot 기반 RESTful API를 직접 설계하고 구현하며 HTTP 메서드·상태코드·응답 형식의 일관성을 맞추는 방법을 익혔습니다.' },
+        { title: '인증 구현', desc: 'Spring Security + 카카오 OAuth2를 연동하여 소셜 로그인 플로우를 직접 구현하고, 세션 및 JWT 처리를 학습했습니다.' },
+        { title: '팀 협업 & 코드 리뷰', desc: 'GitHub Flow를 활용한 브랜치 전략과 PR 코드 리뷰를 통해 협업 개발 방식을 실무에 가깝게 경험했습니다.' },
+      ],
+      team: '이태훈(팀장·BE), 장나영(FE), 정승호(FE/BE), 강진호(FE/BE)',
+    },
+    lir: {
+      title: 'Living In Research',
+      subtitle: 'Unity 3D 멀티플레이어 크래프팅 생존 게임',
+      type: 'solo',
+      typeLabel: '개인 프로젝트',
+      period: '2025.09.16 — 진행 중',
+      role: '개발자 (전체)',
+      github: 'https://black-d-og.itch.io/living-in-research',
+      githubLabel: 'itch.io에서 보기',
+      desc: `Unity 6 기반 멀티플레이어 크래프팅 생존 게임입니다. Steamworks API와 FacePunch Transport, NGO를 활용한 P2P 방식 멀티플레이어 네트워킹을 구현했습니다.\n\n스토리 아이템 수집, 자원 수집 및 아이템 제작, 기지 건설, 몬스터 전투, NPC 퀘스트 등 다양한 게임 콘텐츠를 포함하며, 게임 출시(itch.io)까지 직접 경험하는 것이 목표입니다.`,
+      features: ['스토리 & NPC 퀘스트', '자원 수집 & 아이템 제작', 'Grid 기지 건설', '몬스터 전투', 'Steam P2P 멀티', 'FSM AI', '네트워크 동기화 인벤토리', '싱글톤 패턴', 'Object Pooling'],
+      stacks: [
+        { label: '언어', tags: [{ text: 'C#', cls: 'engine' }] },
+        { label: '엔진', tags: [{ text: 'Unity 6 (6000.0.58f2)', cls: 'engine' }] },
+        { label: '네트워크 SDK', tags: [{ text: 'Steamworks API', cls: 'engine' }, { text: 'FacePunch Transport', cls: 'engine' }, { text: 'NGO (Netcode)', cls: 'engine' }] },
+        { label: '아키텍처', tags: [{ text: '싱글톤 패턴', cls: 'infra' }, { text: 'FSM', cls: 'infra' }, { text: 'P2P 네트워킹', cls: 'infra' }] },
+        { label: '버전관리', tags: [{ text: 'Git', cls: 'infra' }, { text: 'GitHub', cls: 'infra' }] },
+      ],
+      challenges: [
+        { title: 'P2P 멀티플레이어 네트워킹', desc: 'Steamworks API + FacePunch Transport + NGO를 조합해 Steam 친구 초대 기반 P2P 멀티플레이어를 구현. 로비 생성·참가·연결 플로우 전체를 직접 설계했습니다.' },
+        { title: '네트워크 동기화 인벤토리', desc: 'NetworkList를 활용한 서버-클라이언트 인벤토리 동기화 구현. 아이템 추가·삭제·이동·제작 전 과정을 ServerRpc/ClientRpc 패턴으로 처리했습니다.' },
+        { title: 'Grid 하우징 시스템', desc: 'Raycast와 격자 스냅(SnapToGrid)을 이용한 블록 설치 판정 시스템 구현. 설치 가능 여부를 시각적 인디케이터로 즉시 피드백합니다.' },
+      ],
+    },
+    fortune: {
+      title: 'Fortune Heroes',
+      subtitle: 'Unity 3D 모바일 방치형 RPG 게임',
+      type: 'solo',
+      typeLabel: '개인 프로젝트',
+      period: '2025.02.06 — 2025.03.06',
+      role: '개발자 (전체)',
+      github: 'https://github.com/xoxohoon01/Fortune-Hero',
+      githubLabel: 'xoxohoon01/Fortune-Hero',
+      desc: `Unity 2022 기반 3D 모바일 방치형 RPG 게임입니다. 판타지 히어로즈·세븐나이츠를 레퍼런스로, 다양한 영웅 조합과 육성 시스템을 구현했습니다.\n\nGoogle Sheets(UGS)를 활용한 데이터 관리, Object Pooling을 통한 성능 최적화, Addressables를 활용한 동적 에셋 로딩, 제네릭 기반 동적 UI 시스템 등 Unity의 다양한 고급 기술을 학습하고 직접 구현했습니다.`,
+      features: ['자동 전투 스테이지', '영웅 육성 & 초월 강화', '아이템 파밍 & 장착', 'AI (FSM)', '클리어 보상 시스템', '가중치 랜덤 뽑기', 'Object Pooling', 'UGS 데이터 관리', 'Addressables', '동적 UI 생성'],
+      stacks: [
+        { label: '언어 & 엔진', tags: [{ text: 'C#', cls: 'engine' }, { text: 'Unity 2022.3.17f1', cls: 'engine' }] },
+        { label: '데이터 관리', tags: [{ text: 'UGS', cls: 'infra' }, { text: 'Google Sheets', cls: 'infra' }, { text: 'JSON', cls: 'infra' }] },
+        { label: '기술', tags: [{ text: 'Addressables', cls: '' }, { text: 'Object Pooling', cls: '' }, { text: '제네릭 UI', cls: '' }] },
+        { label: '버전관리', tags: [{ text: 'Git', cls: 'infra' }, { text: 'GitHub', cls: 'infra' }] },
+      ],
+      challenges: [
+        { title: 'UGS (Unity Google Sheets)', desc: 'Google Spreadsheet의 게임 데이터를 Unity로 파싱하여 실시간 데이터 수정·관리를 가능하게 했습니다. DataManager를 통해 전역 접근하는 구조로 설계했습니다.' },
+        { title: 'Object Pooling', desc: 'ObjectPoolManager를 구현하여 Dictionary<string, ObjectPool<GameObject>> 구조로 다양한 오브젝트 풀을 통합 관리. GC 부하를 줄여 모바일 환경에서 성능을 최적화했습니다.' },
+        { title: 'Addressables 에셋 관리', desc: '다양한 종류의 모델링을 동적으로 로드하기 위해 Addressables를 도입. 폴더가 아닌 개별 에셋 지정 방식으로 설정해야 한다는 점을 트러블슈팅을 통해 해결했습니다.' },
+        { title: '제네릭 동적 UI 시스템', desc: 'UIBase를 기반으로 UIManager의 Show<T>/Hide<T> 메서드를 구현. 제네릭 타입 제약(where T : UIBase)으로 다양한 UI를 유연하게 관리합니다.' },
+      ],
+    },
+  };
+
+  function tag(text, cls) {
+    return `<span class="stack-tag ${cls || ''}">${text}</span>`;
+  }
+
+  function openModal(id) {
+    const p = projects[id];
+    if (!p) return;
+
+    const typeCls = p.type === 'team' ? 'team' : 'solo';
+    const challengeHTML = p.challenges.map(c =>
+      `<div class="modal-challenge"><strong>${c.title}</strong>${c.desc}</div>`
+    ).join('');
+    const stackHTML = p.stacks.map(s =>
+      `<div style="margin-bottom:12px"><div class="stack-label" style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">${s.label}</div>
+      <div class="modal-stack-row">${s.tags.map(t => tag(t.text, 'stack-tag ' + t.cls)).join('')}</div></div>`
+    ).join('');
+    const featHTML = p.features.map(f => `<div class="modal-feature-item">${f}</div>`).join('');
+    const teamRow = p.team ? `<div class="modal-section"><div class="modal-section-label">팀 구성</div><p class="modal-desc">${p.team}</p></div>` : '';
+
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-tag-row">
+        <span class="project-type ${typeCls}">${p.typeLabel}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);">${p.period}</span>
+        ${p.role ? `<span style="font-size:12px;color:var(--muted);">· ${p.role}</span>` : ''}
+      </div>
+      <div class="modal-title">${p.title}</div>
+      <div class="modal-subtitle">${p.subtitle}</div>
+
+      <div class="modal-section">
+        <div class="modal-section-label">프로젝트 소개</div>
+        <p class="modal-desc">${p.desc.replace(/\n/g, '<br>')}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-label">주요 기능</div>
+        <div class="modal-feature-grid">${featHTML}</div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-label">기술 스택</div>
+        ${stackHTML}
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-label">기술적 도전</div>
+        ${challengeHTML}
+      </div>
+
+      ${teamRow}
+
+      <div class="modal-link-row">
+        <a class="modal-btn primary" href="${p.github}" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          ${p.githubLabel}
+        </a>
+        <button class="modal-btn outline" onclick="closeModal()">닫기</button>
+      </div>
+    `;
+
+    document.getElementById('modalBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnBackdrop(e) {
+    if (e.target === document.getElementById('modalBackdrop')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── 스크롤 애니메이션 ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.strength-item, .skill-group, .project-card, .award-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
