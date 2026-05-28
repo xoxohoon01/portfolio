@@ -593,6 +593,30 @@
   }
   .project-card:hover .click-hint { opacity: 1; }
 
+  /* ─── PROJECT PREVIEW ─── */
+  .project-preview {
+    display: flex;
+    gap: 8px;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .project-preview::-webkit-scrollbar { height: 4px; }
+  .project-preview::-webkit-scrollbar-track { background: transparent; }
+  .project-preview::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .project-preview img {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    cursor: zoom-in;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .project-preview img:hover { border-color: var(--tag-border); transform: scale(1.04); }
+
   /* ─── FOOTER ─── */
   footer {
     padding: 3rem;
@@ -823,20 +847,24 @@
     <div class="skill-group">
       <div class="skill-group-label">프레임워크</div>
       <div class="skill-tags">
-        <span class="skill-tag primary">Spring Boot</span>
+        <span class="skill-tag primary">DOTween</span>
+        <span class="skill-tag primary">.NET Framework</span>
+        <span class="skill-tag">Spring Boot</span>
         <span class="skill-tag">React</span>
         <span class="skill-tag">NGO (Netcode)</span>
         <span class="skill-tag">FacePunch</span>
+        <span class="skill-tag">Steamworks SDK</span>
       </div>
     </div>
     <div class="skill-group">
       <div class="skill-group-label">데이터 &amp; 인프라</div>
       <div class="skill-tags">
+        <span class="skill-tag primary">JSON</span>
         <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">JSON</span>
         <span class="skill-tag">REST API</span>
         <span class="skill-tag">MVC 패턴</span>
         <span class="skill-tag">TCP/IP</span>
+        <span class="skill-tag">PlayerPrefs</span>
       </div>
     </div>
     <div class="skill-group">
@@ -846,7 +874,6 @@
         <span class="skill-tag">Notion</span>
         <span class="skill-tag">Figma</span>
         <span class="skill-tag">Canva</span>
-        <span class="skill-tag">Steamworks SDK</span>
       </div>
     </div>
   </div>
@@ -925,76 +952,20 @@
           </div>
         </div>
       </div>
-      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
-    </div>
-
-    <!-- Project 2: Living In Research -->
-    <div class="project-card" onclick="openModal('lir')">
-      <div class="project-header">
-        <div>
-          <div class="project-num">02 / 04</div>
-          <div class="project-title">Living In Research</div>
-          <div class="project-meta">
-            <span class="project-type solo">개인 프로젝트</span>
-            <span class="project-period">2025.09 — 2025.11</span>
-          </div>
-        </div>
-        <a class="project-link" href="https://black-d-og.itch.io/living-in-research" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          itch.io
-        </a>
-      </div>
-      <div class="project-body">
-        <div>
-          <p class="project-desc">
-            Unity 6 기반 멀티플레이어 크래프팅 생존 게임. Steamworks API를 활용한 P2P 네트워킹, FSM 기반 AI, Grid 방식 하우징 시스템, 네트워크 동기화 인벤토리 등 고난도 기술을 직접 구현했습니다.
-          </p>
-          <div class="project-features">
-            <span class="project-feature">스토리 &amp; 퀘스트</span>
-            <span class="project-feature">자원 수집 &amp; 제작</span>
-            <span class="project-feature">기지 건설 (Grid)</span>
-            <span class="project-feature">몬스터 전투</span>
-            <span class="project-feature">Steam P2P 멀티</span>
-            <span class="project-feature">FSM AI</span>
-            <span class="project-feature">네트워크 동기화 인벤토리</span>
-          </div>
-        </div>
-        <div class="project-stack">
-          <div>
-            <div class="stack-label">언어</div>
-            <div class="stack-tags">
-              <span class="stack-tag engine">C#</span>
-            </div>
-          </div>
-          <br>
-          <div>
-            <div class="stack-label">엔진 &amp; SDK</div>
-            <div class="stack-tags">
-              <span class="stack-tag engine">Unity 6</span>
-              <span class="stack-tag engine">Steamworks</span>
-              <span class="stack-tag engine">NGO</span>
-              <span class="stack-tag engine">FacePunch</span>
-            </div>
-          </div>
-          <br>
-          <div>
-            <div class="stack-label">아키텍처</div>
-            <div class="stack-tags">
-              <span class="stack-tag infra">싱글톤</span>
-              <span class="stack-tag infra">FSM</span>
-              <span class="stack-tag infra">Object Pooling</span>
-            </div>
-          </div>
-        </div>
+      <div class="project-preview" onclick="event.stopPropagation()">
+        <img src="Soul Taker/전투 1.gif" alt="전투" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Soul Taker/스킬 1.gif" alt="스킬" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Soul Taker/아이템 1.gif" alt="아이템" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Soul Taker/퀘스트 및 보상 1.gif" alt="퀘스트" loading="lazy" onclick="openLightbox(this.src)">
       </div>
       <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
     </div>
 
-    <!-- Project 3: Fortune Heroes -->
+    <!-- Project 2: Fortune Heroes -->
     <div class="project-card" onclick="openModal('fortune')">
       <div class="project-header">
         <div>
-          <div class="project-num">03 / 04</div>
+          <div class="project-num">02 / 04</div>
           <div class="project-title">Fortune Heroes</div>
           <div class="project-meta">
             <span class="project-type solo">개인 프로젝트</span>
@@ -1048,14 +1019,20 @@
           </div>
         </div>
       </div>
+      <div class="project-preview" onclick="event.stopPropagation()">
+        <img src="Fortune Hero/Stage2.gif" alt="스테이지" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Fortune Hero/Combat2.gif" alt="전투" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Fortune Hero/Equipment.png" alt="장비" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Fortune Hero/Heros.png" alt="영웅" loading="lazy" onclick="openLightbox(this.src)">
+      </div>
       <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
     </div>
 
-    <!-- Project 4: Path Note -->
+    <!-- Project 3: Path Note -->
     <div class="project-card" onclick="openModal('pathnote')">
       <div class="project-header">
         <div>
-          <div class="project-num">04 / 04</div>
+          <div class="project-num">03 / 04</div>
           <div class="project-title">Path Note</div>
           <div class="project-meta">
             <span class="project-type team">팀 프로젝트</span>
@@ -1111,10 +1088,83 @@
           </div>
         </div>
       </div>
+      <div class="project-preview" onclick="event.stopPropagation()">
+        <img src="Path Note/Path Note - 데이트 코스 공유 플랫폼 웹 서비스.png" alt="메인" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Path Note/Path-Note 구조도.png" alt="구조도" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Path Note/Path-Note 백엔드.png" alt="백엔드" loading="lazy" onclick="openLightbox(this.src)">
+      </div>
       <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
     </div>
 
-  </div>
+<!-- Project 4: Living In Research -->
+    <div class="project-card" onclick="openModal('lir')">
+      <div class="project-header">
+        <div>
+          <div class="project-num">04 / 04</div>
+          <div class="project-title">Living In Research</div>
+          <div class="project-meta">
+            <span class="project-type solo">개인 프로젝트</span>
+            <span class="project-period">2025.09 — 2025.10</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://black-d-og.itch.io/living-in-research" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          itch.io
+        </a>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">
+            Unity 6 기반 멀티플레이어 크래프팅 생존 게임. Steamworks API를 활용한 P2P 네트워킹, FSM 기반 AI, Grid 방식 하우징 시스템, 네트워크 동기화 인벤토리 등 고난도 기술을 직접 구현했습니다.
+          </p>
+          <div class="project-features">
+            <span class="project-feature">스토리 &amp; 퀘스트</span>
+            <span class="project-feature">자원 수집 &amp; 제작</span>
+            <span class="project-feature">기지 건설 (Grid)</span>
+            <span class="project-feature">몬스터 전투</span>
+            <span class="project-feature">Steam P2P 멀티</span>
+            <span class="project-feature">FSM AI</span>
+            <span class="project-feature">네트워크 동기화 인벤토리</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <div>
+            <div class="stack-label">언어</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">C#</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">엔진 &amp; SDK</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">Unity 6</span>
+              <span class="stack-tag engine">Steamworks</span>
+              <span class="stack-tag engine">NGO</span>
+              <span class="stack-tag engine">FacePunch</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">아키텍처</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">싱글톤</span>
+              <span class="stack-tag infra">FSM</span>
+              <span class="stack-tag infra">Object Pooling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-preview" onclick="event.stopPropagation()">
+        <img src="Living In Research/플레이1.png" alt="플레이" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Living In Research/전투.gif" alt="전투" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Living In Research/수집.gif" alt="수집" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Living In Research/하우징2.jpg" alt="하우징" loading="lazy" onclick="openLightbox(this.src)">
+      </div>
+      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
+    </div>
+
+      </div>
 </section>
 
 <div class="section-divider"></div>
@@ -1196,7 +1246,7 @@
       subtitle: 'Unity 3D 멀티플레이어 크래프팅 생존 게임',
       type: 'solo',
       typeLabel: '개인 프로젝트',
-      period: '2025.09.16 — 2025.11.13',
+      period: '2025.09.16 — 2025.10.31',
       role: '개발자 (전체)',
       github: 'https://black-d-og.itch.io/living-in-research',
       githubLabel: 'itch.io에서 보기',

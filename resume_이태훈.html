@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이력서 — 이태훈</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    background: #f4f4f4;
+    line-height: 1.6;
+  }
+
+  .print-btn {
+    text-align: center;
+    padding: 16px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  .print-btn button {
+    padding: 9px 28px;
+    background: #1a3a5c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  .print-btn button:hover { background: #14304d; }
+  .print-btn span {
+    font-size: 12px;
+    color: #888;
+  }
+  @media print { .print-btn { display: none; } }
+
+  .page {
+    max-width: 210mm;
+    margin: 20px auto;
+    background: #fff;
+    padding: 16mm 17mm 14mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  @media print {
+    body { background: #fff; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      padding: 14mm 15mm 12mm;
+      max-width: none;
+    }
+  }
+
+  /* ── 제목 ── */
+  .resume-title {
+    text-align: center;
+    font-size: 20pt;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    margin-bottom: 14px;
+    color: #1a1a1a;
+  }
+
+  /* ── 인적사항 테이블 ── */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+    table-layout: fixed;
+  }
+  .info-table td {
+    border: 1px solid #aaa;
+    padding: 5px 10px;
+    font-size: 9.5pt;
+    vertical-align: middle;
+  }
+  .info-table .label {
+    background: #f0f4f8;
+    font-weight: 600;
+    color: #1a3a5c;
+    text-align: center;
+    width: 70px;
+    white-space: nowrap;
+  }
+  .info-table .value {
+    color: #1a1a1a;
+  }
+  .photo-cell {
+    border: 1px solid #aaa;
+    text-align: center;
+    vertical-align: middle;
+    width: 90px;
+  }
+  .photo-cell img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    margin: 0 auto;
+  }
+  .photo-placeholder {
+    width: 80px;
+    height: 100px;
+    background: #e8edf2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    color: #999;
+    text-align: center;
+    line-height: 1.4;
+    margin: 0 auto;
+  }
+
+  /* ── 섹션 ── */
+  .section {
+    margin-top: 14px;
+  }
+  .section-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #fff;
+    background: #1a3a5c;
+    padding: 4px 10px;
+    letter-spacing: 0.08em;
+    margin-bottom: 0;
+  }
+  .section-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .section-table td {
+    border: 1px solid #bbb;
+    padding: 5px 10px;
+    font-size: 9.5pt;
+    vertical-align: top;
+  }
+  .section-table tr:first-child td { border-top: none; }
+  .col-period {
+    width: 148px;
+    color: #555;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .col-org {
+    width: 160px;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+  .col-detail { color: #333; }
+  .col-status {
+    width: 70px;
+    text-align: center;
+    color: #1a3a5c;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  /* ── 기술 스택 ── */
+  .skill-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .skill-table td {
+    border: 1px solid #bbb;
+    padding: 5px 10px;
+    font-size: 9pt;
+    vertical-align: middle;
+  }
+  .skill-table tr:first-child td { border-top: none; }
+  .skill-label {
+    background: #f0f4f8;
+    font-weight: 600;
+    color: #1a3a5c;
+    width: 110px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag {
+    display: inline-block;
+    font-size: 8pt;
+    padding: 1px 7px;
+    border-radius: 2px;
+    border: 1px solid #bbb;
+    color: #444;
+    background: #fff;
+  }
+  .tag.primary {
+    border-color: #1a3a5c;
+    color: #1a3a5c;
+    background: #eef2f7;
+    font-weight: 600;
+  }
+
+  /* ── 프로젝트 ── */
+  .proj-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .proj-table td {
+    border: 1px solid #bbb;
+    padding: 7px 10px;
+    font-size: 9pt;
+    vertical-align: top;
+  }
+  .proj-table tr:first-child td { border-top: none; }
+  .proj-name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+  .proj-meta {
+    font-size: 8.5pt;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  .proj-meta .badge {
+    display: inline-block;
+    font-size: 7.5pt;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .badge-team { background: #ede9ff; color: #4c1d95; border: 1px solid #c4b5fd; }
+  .badge-solo { background: #ecfdf5; color: #065f46; border: 1px solid #6ee7b7; }
+  .proj-desc { font-size: 9pt; color: #333; line-height: 1.65; margin-bottom: 5px; }
+  .proj-stack { font-size: 8.5pt; color: #555; }
+  .proj-period-col {
+    width: 148px;
+    color: #555;
+    font-size: 8.5pt;
+    white-space: nowrap;
+    vertical-align: top;
+    padding-top: 9px;
+  }
+  .proj-award {
+    display: inline-block;
+    font-size: 8pt;
+    padding: 1px 7px;
+    background: #fef9c3;
+    border: 1px solid #fbbf24;
+    border-radius: 2px;
+    color: #92400e;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+
+  /* ── 자기소개 ── */
+  .intro-box {
+    border: 1px solid #bbb;
+    border-top: none;
+    padding: 10px 12px;
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 1.85;
+    min-height: 80px;
+  }
+
+  /* ── 서명란 ── */
+  .sign-row {
+    margin-top: 18px;
+    text-align: right;
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 2;
+  }
+  .sign-row .date { margin-bottom: 4px; }
+  .sign-row .name-line { letter-spacing: 0.1em; }
+  .sign-row .sign-box {
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+    border-bottom: 1px solid #888;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<div class="print-btn">
+  <button onclick="window.print()">PDF로 저장 (Ctrl+P)</button>
+  <span>— 여백 "없음", 배경 그래픽 체크 권장</span>
+</div>
+
+<div class="page">
+
+  <!-- 제목 -->
+  <div class="resume-title">이 력 서</div>
+
+  <!-- 인적사항 -->
+  <table class="info-table">
+    <tr>
+      <td class="label">성&emsp;명</td>
+      <td class="value" style="font-weight:700; font-size:11pt;">이태훈</td>
+      <td class="label">생년월일</td>
+      <td class="value">2001년 3월 27일</td>
+      <td class="photo-cell" rowspan="5">
+        <img src="사진.jpg" alt="증명사진" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="photo-placeholder" style="display:none;">증명<br>사진</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">연락처</td>
+      <td class="value">010-8220-3350</td>
+      <td class="label">성&emsp;별</td>
+      <td class="value">남</td>
+    </tr>
+    <tr>
+      <td class="label">이메일</td>
+      <td class="value" colspan="3">xoxohoon01@gmail.com</td>
+    </tr>
+    <tr>
+      <td class="label">주&emsp;소</td>
+      <td class="value" colspan="3">경기도 고양시 일산서구</td>
+    </tr>
+    <tr>
+      <td class="label">병&emsp;역</td>
+      <td class="value">군필 (만기 전역)</td>
+      <td class="label">GitHub</td>
+      <td class="value">github.com/xoxohoon01</td>
+    </tr>
+  </table>
+
+  <!-- 학력 -->
+  <div class="section">
+    <div class="section-title">학&nbsp;&nbsp;&nbsp;력</div>
+    <table class="section-table">
+      <tr>
+        <td class="col-period">2020.03 — 현재</td>
+        <td class="col-org">호남대학교</td>
+        <td class="col-detail">소프트웨어학과</td>
+        <td class="col-status">휴학 중</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 교육 이수 -->
+  <div class="section">
+    <div class="section-title">교육 이수</div>
+    <table class="section-table">
+      <tr>
+        <td class="col-period">2024.09 — 2025.01</td>
+        <td class="col-org">내일배움캠프</td>
+        <td class="col-detail">Unity 게임 개발 트랙 &nbsp;·&nbsp; 최종 프로젝트 <strong>우수상</strong> 수상</td>
+        <td class="col-status">수료</td>
+      </tr>
+      <tr>
+        <td class="col-period">2025.06 — 2025.10</td>
+        <td class="col-org">대전대HRD</td>
+        <td class="col-detail">빅데이터기반 IoT 클라우드 서비스 부트캠프&nbsp;·&nbsp; 하드웨어 시스템 개발, 네트워킹, DBMS, Spring Boot 백엔드</td>
+        <td class="col-status">수료</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 기술 스택 -->
+  <div class="section">
+    <div class="section-title">기술 스택</div>
+    <table class="skill-table">
+      <tr>
+        <td class="skill-label">프로그래밍 언어</td>
+        <td>
+          <div class="skill-tags">
+            <span class="tag primary">C#</span>
+            <span class="tag primary">Java</span>
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">Python</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">HTML</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-label">게임 엔진</td>
+        <td>
+          <div class="skill-tags">
+            <span class="tag primary">Unity</span>
+            <span class="tag">Game Maker</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-label">프레임워크 / SDK</td>
+        <td>
+          <div class="skill-tags">
+            <span class="tag primary">DOTween</span>
+            <span class="tag primary">.NET Framework</span>
+            <span class="tag">Steamworks SDK</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">React</span>
+            <span class="tag">NGO (Netcode)</span>
+            <span class="tag">FacePunch Transport</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-label">데이터 / 인프라</td>
+        <td>
+          <div class="skill-tags">
+            <span class="tag primary">JSON</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">REST API</span>
+            <span class="tag">MVC 패턴</span>
+            <span class="tag">TCP/IP</span>
+            <span class="tag">PlayerPrefs</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="skill-label">협업 / 도구</td>
+        <td>
+          <div class="skill-tags">
+            <span class="tag primary">GitHub</span>
+            <span class="tag">Notion</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Canva</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 프로젝트 -->
+  <div class="section">
+    <div class="section-title">프로젝트</div>
+    <table class="proj-table">
+
+      <tr>
+        <td class="proj-period-col">
+          2024.11 — 2025.01<br>
+          <span style="color:#b45309; font-weight:600;">🏆 우수상</span>
+        </td>
+        <td>
+          <div class="proj-name">
+            Soul Taker
+            <span class="proj-award">우수상</span>
+          </div>
+          <div class="proj-meta">
+            <span class="badge badge-team">팀 프로젝트</span>
+            역할: 팀장 · 게임 개발 &nbsp;|&nbsp; github.com/xoxohoon01/Soul-Taker
+          </div>
+          <div class="proj-desc">
+            내일배움캠프 최종 팀 프로젝트. Unity 3D 모바일 어드벤처 RPG 게임으로 팀장을 맡아 우수상을 수상했습니다.
+            FSM 기반 몬스터 AI, Object Pooling 성능 최적화, NavMesh 경로 탐색, UGS(Unity Google Sheet) 데이터 관리,
+            Sprite Atlas 렌더링 최적화 등 Unity 심화 기술을 전반적으로 설계·구현했습니다.
+          </div>
+          <div class="proj-stack">
+            <strong>Stack:</strong> C# / Unity / UGS / Google Sheets / FSM / NavMesh / Object Pooling / Sprite Atlas
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="proj-period-col">2025.02 — 2025.03</td>
+        <td>
+          <div class="proj-name">Fortune Heroes</div>
+          <div class="proj-meta">
+            <span class="badge badge-solo">개인 프로젝트</span>
+            역할: 개발 전담 &nbsp;|&nbsp; github.com/xoxohoon01/Fortune-Hero
+          </div>
+          <div class="proj-desc">
+            Unity 2022 기반 3D 모바일 방치형 RPG 게임. Google Sheets(UGS)를 활용한 데이터 관리,
+            Object Pooling 성능 최적화, Addressables 동적 에셋 로딩, 제네릭 기반 동적 UI 시스템(Show&lt;T&gt;/Hide&lt;T&gt;)
+            등 Unity 고급 기술을 학습하고 직접 구현했습니다.
+          </div>
+          <div class="proj-stack">
+            <strong>Stack:</strong> C# / Unity 2022 / UGS / Google Sheets / Addressables / Object Pooling / 제네릭 UI
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="proj-period-col">2025.08 — 2025.10</td>
+        <td>
+          <div class="proj-name">Path Note</div>
+          <div class="proj-meta">
+            <span class="badge badge-team">팀 프로젝트</span>
+            역할: 팀장 · 백엔드 개발 &nbsp;|&nbsp; github.com/Team-115
+          </div>
+          <div class="proj-desc">
+            데이트·여행 코스를 설계하고 SNS처럼 공유하는 웹 플랫폼. 팀장으로서 REST API 설계 및 구현,
+            Spring Security + 카카오 OAuth2 소셜 로그인, MVC 패턴·트랜잭션 처리를 담당했습니다.
+          </div>
+          <div class="proj-stack">
+            <strong>Stack:</strong> Java / Spring Boot / Spring Security / React / MySQL / REST API / Git / Figma
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="proj-period-col">2025.09 — 2025.10</td>
+        <td>
+          <div class="proj-name">Living In Research</div>
+          <div class="proj-meta">
+            <span class="badge badge-solo">개인 프로젝트</span>
+            역할: 개발 전담 &nbsp;|&nbsp; black-d-og.itch.io/living-in-research
+          </div>
+          <div class="proj-desc">
+            Unity 6 기반 멀티플레이어 크래프팅 생존 게임. Steamworks API + FacePunch Transport + NGO를 조합한
+            P2P 멀티플레이어 네트워킹, NetworkList 기반 서버-클라이언트 인벤토리 동기화,
+            Raycast 기반 Grid 하우징 시스템을 직접 설계·구현했습니다.
+          </div>
+          <div class="proj-stack">
+            <strong>Stack:</strong> C# / Unity 6 / Steamworks API / FacePunch / NGO / FSM / Object Pooling / P2P 네트워킹
+          </div>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+
+  <!-- 수상 -->
+  <div class="section">
+    <div class="section-title">수&nbsp;&nbsp;&nbsp;상</div>
+    <table class="section-table">
+      <tr>
+        <td class="col-period">2025.01</td>
+        <td class="col-org">내일배움캠프</td>
+        <td class="col-detail">최종 프로젝트 <strong>우수상</strong> — Soul Taker (Unity 3D 모바일 어드벤처 RPG, 팀장)</td>
+        <td class="col-status" style="color:#92400e;">🏆 우수상</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 자기소개 -->
+  <div class="section">
+    <div class="section-title">자기소개</div>
+    <div class="intro-box">
+      <p style="margin-bottom:8px;">
+        빠르고 심도있는 학습을 하는 생성형 생체지능 모델. 게임 개발부터 풀스택 웹 서비스까지 다양한 분야를 아우르는 개발자입니다.
+      </p>
+      <p style="margin-bottom:8px;">
+        어린 시절 게임을 통해 새로운 경험의 가능성을 발견하고 소프트웨어 세계에 입문했습니다. 호남대학교 소프트웨어학과에서 C, C++, Java, Python 등 다양한 언어로 컴퓨터 사고 능력을 키웠으며, 내일배움캠프 Unity 게임 개발 트랙에서 팀장으로 최종 프로젝트 우수상을 수상했습니다.
+      </p>
+      <p>
+        이후 빅데이터기반 IoT 클라우드 서비스 교육을 통해 Spring Boot 백엔드 개발, TCP/IP 네트워킹, DBMS까지 기술 스펙트럼을 확장했습니다. 게임 개발(Unity, C#)부터 웹 백엔드(Java, Spring Boot), 멀티플레이어 네트워킹(Steamworks, NGO)까지 4개의 프로젝트를 통해 폭넓은 실전 경험을 쌓았습니다.
+      </p>
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>
