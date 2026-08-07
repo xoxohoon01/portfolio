@@ -18,7 +18,7 @@
 
   .page {
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
     margin: 20px auto;
     background: #fff;
     padding: 16mm 18mm;
@@ -730,66 +730,73 @@
         </div>
       </div>
 
-      <!-- Troubleshooting -->
-      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
-
-      <div class="ts-item">
-        <div class="ts-number">01</div>
-        <div class="ts-title">CorsConfig 빈 충돌로 CORS 오류 발생</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">프론트엔드에서 API 호출 시 CORS 오류가 간헐적으로 발생했습니다. Spring Boot 기동 시 <code style="font-family:monospace; background:#f0f0f0; padding:0 3px; border-radius:2px;">expected single matching bean but found 2</code> 예외가 출력되며 서버가 비정상 상태로 뜨는 경우가 있었습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">SecurityConfig 내부에서 CORS 설정을 정의하면서, 별도로 작성한 CorsConfig 클래스도 CorsConfigurationSource 빈을 독립적으로 등록해 두 빈이 충돌했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">별도의 CorsConfig 클래스를 제거하고, SecurityConfig 내 httpSecurity.cors()에서 CORS 설정을 통합했습니다. 빈을 단일화해 충돌을 해소하고 허용 Origin·메서드·헤더를 명시적으로 지정했습니다.</div>
-        </div>
-      </div>
-
-      <div class="ts-item">
-        <div class="ts-number">02</div>
-        <div class="ts-title">Docker 환경 MySQL 초기화 타이밍 오류 → PostgreSQL 전환</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">Docker Compose 실행 시 Spring Boot 컨테이너가 DB에 연결하지 못하고 바로 종료됐습니다. init.sql이 실행되기 전에 JPA DDL이 동작하면서 테이블 충돌 오류도 발생했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">MySQL 컨테이너가 완전히 초기화되기 전에 Spring Boot가 DB 연결을 시도했습니다. depends_on은 컨테이너 시작 시점만 보장하고 DB 준비 완료를 보장하지 않아 init.sql 실행 전 연결이 이루어졌습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">DBMS를 PostgreSQL로 전환하고, depends_on에 healthcheck 조건을 추가해 DB가 완전히 기동된 이후 앱 컨테이너가 시작되도록 보장했습니다.</div>
-        </div>
-      </div>
-
-      <div class="ts-item">
-        <div class="ts-number">03</div>
-        <div class="ts-title">카카오 OAuth2 로그인 후 JWT 토큰 미발급</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">카카오 소셜 로그인 플로우를 완료해도 클라이언트가 JWT 토큰을 받지 못하고, 인증이 필요한 API 호출이 모두 401을 반환했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">OAuth2 로그인 성공 핸들러(AuthenticationSuccessHandler)에서 JWT를 생성하고 응답 헤더에 포함하는 로직이 누락되어 있었습니다. 임시 구현 상태로 소셜 로그인 자체는 완료됐지만 토큰 발급 단계가 연결되지 않았습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">성공 핸들러에서 JwtTokenProvider를 통해 액세스 토큰을 발급하고 응답 헤더(Authorization)에 포함했습니다. SecurityConfig의 CORS 설정에 Authorization 헤더를 exposedHeaders로 추가해 클라이언트에서 읽을 수 있도록 수정했습니다.</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
 </div>
 
-<!-- ══ PAGE 5: Living In Research + 수상 ══ -->
+<!-- ══ PAGE 6: Path Note Troubleshooting ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Path Note — Troubleshooting</div>
+
+    <div class="ts-item">
+      <div class="ts-number">01</div>
+      <div class="ts-title">CorsConfig 빈 충돌로 CORS 오류 발생</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">프론트엔드에서 API 호출 시 CORS 오류가 간헐적으로 발생했습니다. Spring Boot 기동 시 <code style="font-family:monospace; background:#f0f0f0; padding:0 3px; border-radius:2px;">expected single matching bean but found 2</code> 예외가 출력되며 서버가 비정상 상태로 뜨는 경우가 있었습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">SecurityConfig 내부에서 CORS 설정을 정의하면서, 별도로 작성한 CorsConfig 클래스도 CorsConfigurationSource 빈을 독립적으로 등록해 두 빈이 충돌했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">별도의 CorsConfig 클래스를 제거하고, SecurityConfig 내 httpSecurity.cors()에서 CORS 설정을 통합했습니다. 빈을 단일화해 충돌을 해소하고 허용 Origin·메서드·헤더를 명시적으로 지정했습니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-number">02</div>
+      <div class="ts-title">Docker 환경 MySQL 초기화 타이밍 오류 → PostgreSQL 전환</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">Docker Compose 실행 시 Spring Boot 컨테이너가 DB에 연결하지 못하고 바로 종료됐습니다. init.sql이 실행되기 전에 JPA DDL이 동작하면서 테이블 충돌 오류도 발생했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">MySQL 컨테이너가 완전히 초기화되기 전에 Spring Boot가 DB 연결을 시도했습니다. depends_on은 컨테이너 시작 시점만 보장하고 DB 준비 완료를 보장하지 않아 init.sql 실행 전 연결이 이루어졌습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">DBMS를 PostgreSQL로 전환하고, depends_on에 healthcheck 조건을 추가해 DB가 완전히 기동된 이후 앱 컨테이너가 시작되도록 보장했습니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-number">03</div>
+      <div class="ts-title">카카오 OAuth2 로그인 후 JWT 토큰 미발급</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">카카오 소셜 로그인 플로우를 완료해도 클라이언트가 JWT 토큰을 받지 못하고, 인증이 필요한 API 호출이 모두 401을 반환했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">OAuth2 로그인 성공 핸들러(AuthenticationSuccessHandler)에서 JWT를 생성하고 응답 헤더에 포함하는 로직이 누락되어 있었습니다. 임시 구현 상태로 소셜 로그인 자체는 완료됐지만 토큰 발급 단계가 연결되지 않았습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">성공 핸들러에서 JwtTokenProvider를 통해 액세스 토큰을 발급하고 응답 헤더(Authorization)에 포함했습니다. SecurityConfig의 CORS 설정에 Authorization 헤더를 exposedHeaders로 추가해 클라이언트에서 읽을 수 있도록 수정했습니다.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══ PAGE 7: Living In Research ══ -->
 <div class="page">
 
   <div class="section">
@@ -860,50 +867,56 @@
         </div>
       </div>
 
-      <!-- Troubleshooting -->
-      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
-
-      <div class="ts-item">
-        <div class="ts-number">01</div>
-        <div class="ts-title">호스트-클라이언트 간 애니메이션 미동기화</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">호스트 화면에서는 캐릭터의 이동·공격 애니메이션이 정상 재생됐지만, 클라이언트 화면에서는 해당 캐릭터가 T-포즈로 고정되거나 애니메이션이 전혀 갱신되지 않았습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">Animator.SetBool / SetTrigger 호출이 로컬에서만 실행됐습니다. NGO P2P 구조에서 애니메이션 파라미터 변경은 자동으로 네트워크에 전파되지 않아 호스트의 상태 변경이 클라이언트에 도달하지 못했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">애니메이션 상태 변경 시 ServerRpc → ClientRpc 순서로 모든 클라이언트에 파라미터를 브로드캐스트하도록 수정했습니다. RPC 방식이 NetworkAnimator보다 불필요한 동기화를 줄여 더 적합했습니다.</div>
-        </div>
-      </div>
-
-      <div class="ts-item">
-        <div class="ts-number">02</div>
-        <div class="ts-title">네트워크 아키텍처 전환 — P2P → Relay 시도 → P2P + RPC</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">P2P 방식에서 애니메이션·오디오 외에도 인벤토리 상태, 오브젝트 생성·파괴 등 다양한 동기화 문제가 연속 발생해 개별 수정만으로 근본 해결이 어렵다고 판단했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">초기 구조에서 게임 상태 변경을 모두 로컬에서 처리했고 네트워크 전파 패턴이 정의되어 있지 않았습니다. Unity Relay 서버 방식으로 전환을 시도했으나 설정 복잡도와 소규모 게임에 불필요한 서버 비용이 문제가 됐습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">Relay를 포기하고 Steamworks 기반 P2P 구조를 유지하면서, 모든 게임 상태 변경을 ServerRpc / ClientRpc 패턴으로 일원화했습니다. 호스트가 권위(authority)를 갖고 상태를 검증한 뒤 ClientRpc로 브로드캐스트하는 구조로 동기화 문제를 체계적으로 해결했습니다.</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
+</div>
+
+<!-- ══ PAGE 8: Living In Research Troubleshooting ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Living In Research — Troubleshooting</div>
+
+    <div class="ts-item">
+      <div class="ts-number">01</div>
+      <div class="ts-title">호스트-클라이언트 간 애니메이션 미동기화</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">호스트 화면에서는 캐릭터의 이동·공격 애니메이션이 정상 재생됐지만, 클라이언트 화면에서는 해당 캐릭터가 T-포즈로 고정되거나 애니메이션이 전혀 갱신되지 않았습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">Animator.SetBool / SetTrigger 호출이 로컬에서만 실행됐습니다. NGO P2P 구조에서 애니메이션 파라미터 변경은 자동으로 네트워크에 전파되지 않아 호스트의 상태 변경이 클라이언트에 도달하지 못했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">애니메이션 상태 변경 시 ServerRpc → ClientRpc 순서로 모든 클라이언트에 파라미터를 브로드캐스트하도록 수정했습니다. RPC 방식이 NetworkAnimator보다 불필요한 동기화를 줄여 더 적합했습니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-number">02</div>
+      <div class="ts-title">네트워크 아키텍처 전환 — P2P → Relay 시도 → P2P + RPC</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">P2P 방식에서 애니메이션·오디오 외에도 인벤토리 상태, 오브젝트 생성·파괴 등 다양한 동기화 문제가 연속 발생해 개별 수정만으로 근본 해결이 어렵다고 판단했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">초기 구조에서 게임 상태 변경을 모두 로컬에서 처리했고 네트워크 전파 패턴이 정의되어 있지 않았습니다. Unity Relay 서버 방식으로 전환을 시도했으나 설정 복잡도와 소규모 게임에 불필요한 서버 비용이 문제가 됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">Relay를 포기하고 Steamworks 기반 P2P 구조를 유지하면서, 모든 게임 상태 변경을 ServerRpc / ClientRpc 패턴으로 일원화했습니다. 호스트가 권위(authority)를 갖고 상태를 검증한 뒤 ClientRpc로 브로드캐스트하는 구조로 동기화 문제를 체계적으로 해결했습니다.</div>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
-<!-- ══ PAGE 7: Core Catcher ══ -->
+<!-- ══ PAGE 9: Core Catcher ══ -->
 <div class="page">
 
   <div class="section">
@@ -980,47 +993,59 @@
         </div>
       </div>
 
-      <!-- Troubleshooting -->
-      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
-
-      <div class="ts-item">
-        <div class="ts-number">01</div>
-        <div class="ts-title">InvokeCritical 관통 탄환 중복 발동</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">관통 탄환이 여러 적을 연속 피격할 때 SharpEye 등 크리티컬 이벤트 트리거가 피격 수만큼 중복 발동됐습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">InvokeCritical 함수가 적마다 크리티컬 데미지를 재계산할 때마다 호출되어, 탄환 하나로 N명을 맞히면 OnCritical 이벤트가 N번 발동됐습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">BulletController에 hasFiredCritEvent 플래그를 추가해 탄환 인스턴스당 최초 1회만 OnCritical을 발동하도록 수정했습니다. 크리티컬 데미지 재계산과 이벤트 발동을 분리해 독립적으로 처리합니다.</div>
-        </div>
-      </div>
-
-      <div class="ts-item">
-        <div class="ts-number">02</div>
-        <div class="ts-title">아티팩트 결합도 — PlayerController 비대화</div>
-        <div class="ts-row">
-          <div class="ts-label">증상</div>
-          <div class="ts-content">아티팩트마다 PlayerController에 직접 이벤트를 구독하는 코드가 중복·산재해, 아티팩트가 늘어날수록 PlayerController가 비대해지고 결합도가 높아졌습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">원인</div>
-          <div class="ts-content">각 아티팩트 효과가 조건 분기문이나 직접 메서드 호출로 구현되어 PlayerController가 모든 아티팩트 로직을 알아야 했습니다.</div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-label">해결</div>
-          <div class="ts-content">PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트 훅만 선언하고, 아티팩트는 IArtifactCardEffect 인터페이스를 구현해 독립적으로 구독·해제하도록 개선했습니다. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 PlayerController 수정 없이 새 아티팩트를 추가할 수 있습니다.</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <div class="section" style="margin-top:16px;">
+</div>
+
+<!-- ══ PAGE 10: Core Catcher Troubleshooting ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Core Catcher — Troubleshooting</div>
+
+    <div class="ts-item">
+      <div class="ts-number">01</div>
+      <div class="ts-title">InvokeCritical 관통 탄환 중복 발동</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">관통 탄환이 여러 적을 연속 피격할 때 SharpEye 등 크리티컬 이벤트 트리거가 피격 수만큼 중복 발동됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">InvokeCritical 함수가 적마다 크리티컬 데미지를 재계산할 때마다 호출되어, 탄환 하나로 N명을 맞히면 OnCritical 이벤트가 N번 발동됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">BulletController에 hasFiredCritEvent 플래그를 추가해 탄환 인스턴스당 최초 1회만 OnCritical을 발동하도록 수정했습니다. 크리티컬 데미지 재계산과 이벤트 발동을 분리해 독립적으로 처리합니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-number">02</div>
+      <div class="ts-title">아티팩트 결합도 — PlayerController 비대화</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">아티팩트마다 PlayerController에 직접 이벤트를 구독하는 코드가 중복·산재해, 아티팩트가 늘어날수록 PlayerController가 비대해지고 결합도가 높아졌습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">각 아티팩트 효과가 조건 분기문이나 직접 메서드 호출로 구현되어 PlayerController가 모든 아티팩트 로직을 알아야 했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트 훅만 선언하고, 아티팩트는 IArtifactCardEffect 인터페이스를 구현해 독립적으로 구독·해제하도록 개선했습니다. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 PlayerController 수정 없이 새 아티팩트를 추가할 수 있습니다.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══ PAGE 11: Unity Asset Store ══ -->
+<div class="page">
+
+  <div class="section">
     <div class="section-title">Unity Asset Store — 제작 판매</div>
     <div style="display:flex; gap:14px; margin-top:8px;">
       <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
