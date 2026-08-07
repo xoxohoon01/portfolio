@@ -205,8 +205,12 @@
     .project-gallery-col { page-break-inside: avoid; break-inside: avoid; }
     .project-gallery-col img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .award-box { page-break-inside: avoid; break-inside: avoid; }
-    /* GIF는 PDF에서 모든 프레임이 임베드되어 용량 급증 — 인쇄 시 제외 */
+    /* GIF 프레임 임베드 방지 */
     img[src$=".gif"] { display: none; }
+    /* 디테일 컷 이미지 제외 (PDF 용량 절감) */
+    img[src*="디테일"] { display: none; }
+    /* Noto Sans KR 임베드 방지 — 시스템 폰트 사용 */
+    body, * { font-family: '맑은 고딕', 'Apple SD Gothic Neo', sans-serif !important; }
   }
 </style>
 </head>
