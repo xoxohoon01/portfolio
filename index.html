@@ -734,6 +734,7 @@
     <li><a href="#about">소개</a></li>
     <li><a href="#skills">기술</a></li>
     <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#assets">애셋</a></li>
     <li><a href="#award">수상</a></li>
   </ul>
 </nav>
@@ -801,6 +802,10 @@
       <br>
       <p class="about-text">
         Steam 출시를 목표로 <strong>Living In Research</strong>를 개발하며 P2P 멀티플레이어라는 고난도 기술에 도전했습니다. Steamworks + FacePunch + NGO 조합으로 P2P 구조를 직접 설계하고, NetworkList 기반 인벤토리 동기화, Grid 하우징 시스템을 구현하며 분산 시스템 이해를 심화했습니다.
+      </p>
+      <br>
+      <p class="about-text">
+        itch.io에 공개한 <strong>Core Catcher</strong>를 개발하며 이벤트 훅 기반 아티팩트 시스템, 3단계 크리티컬 설계, 프로시저럴 바이옴 맵 등 로그라이트 핵심 메카닉을 직접 연구·구현했습니다. 개발 과정에서 분리·정제한 툴을 Unity Asset Store에 제작·등록해 실제 판매하는 경험까지 쌓았습니다.
       </p>
     </div>
 
@@ -1108,7 +1113,7 @@
     <div class="project-card" onclick="openModal('lir')">
       <div class="project-header">
         <div>
-          <div class="project-num">04 / 04</div>
+          <div class="project-num">04 / 05</div>
           <div class="project-title">Living In Research</div>
           <div class="project-meta">
             <span class="project-type solo">개인 프로젝트</span>
@@ -1172,7 +1177,120 @@
       <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
     </div>
 
+<!-- Project 5: Core Catcher -->
+    <div class="project-card" onclick="openModal('corecatcher')">
+      <div class="project-header">
+        <div>
+          <div class="project-num">05 / 05</div>
+          <div class="project-title">Core Catcher</div>
+          <div class="project-meta">
+            <span class="project-type solo">개인 프로젝트</span>
+            <span class="project-period">2025.12 — 2026.07</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://black-d-og.itch.io/core-catcher" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          itch.io
+        </a>
       </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">
+            Unity 6 기반 탑뷰 로그라이트 슈터. 이벤트 훅 기반 아티팩트 시스템, 3단계 크리티컬, 프로시저럴 바이옴 맵, 한국어/영어 로컬라이제이션까지 로그라이트 핵심 메카닉을 직접 설계·구현했습니다.
+          </p>
+          <div class="project-features">
+            <span class="project-feature">카드 선택 레벨업</span>
+            <span class="project-feature">아티팩트 시스템</span>
+            <span class="project-feature">스킬 트리</span>
+            <span class="project-feature">크리티컬 3단계</span>
+            <span class="project-feature">군집 스폰</span>
+            <span class="project-feature">바이옴 맵 생성</span>
+            <span class="project-feature">로컬라이제이션</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <div>
+            <div class="stack-label">언어 &amp; 엔진</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">C#</span>
+              <span class="stack-tag engine">Unity 6</span>
+              <span class="stack-tag engine">URP</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">에셋 &amp; 데이터</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">Addressables</span>
+              <span class="stack-tag infra">ScriptableObject</span>
+              <span class="stack-tag infra">Localization</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <div class="stack-label">아키텍처</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">이벤트 훅</span>
+              <span class="stack-tag infra">FSM</span>
+              <span class="stack-tag infra">Object Pooling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-preview" onclick="event.stopPropagation()">
+        <img src="Core Catcher/전투1.webp" alt="전투 1" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Core Catcher/전투2.webp" alt="전투 2" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Core Catcher/전투3.webp" alt="전투 3" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Core Catcher/전투.png" alt="전투" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Core Catcher/카드.png" alt="레벨업 카드" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="Core Catcher/스킬트리.png" alt="스킬 트리" loading="lazy" onclick="openLightbox(this.src)">
+      </div>
+      <div class="click-hint">↗ 클릭하여 세부내용 보기</div>
+    </div>
+
+      </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ASSET STORE -->
+<section id="assets" style="padding:6rem 3rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Assets</div>
+    <h2 class="section-heading">Unity Asset Store</h2>
+    <p style="font-size:15px;color:#d0d0d0;margin-bottom:2.5rem;line-height:1.8;">Core Catcher 개발 과정에서 분리·정제한 유틸리티를 Unity Asset Store에 제작·등록해 실제 판매합니다.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;">
+
+      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem;">
+          <div>
+            <div style="font-size:18px;font-weight:700;margin-bottom:4px;">Simple Attack Indicator</div>
+            <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;">VFX / Shaders &nbsp;·&nbsp; $15 &nbsp;·&nbsp; 2026.04</div>
+          </div>
+          <a href="https://youtu.be/ThD3eqbgFCg" target="_blank" style="font-size:12px;color:var(--accent);border:1px solid var(--tag-border);background:var(--tag-bg);padding:5px 12px;border-radius:2px;text-decoration:none;white-space:nowrap;font-family:'Space Mono',monospace;flex-shrink:0;">▶ 데모</a>
+        </div>
+        <p style="font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:1rem;">URP 기반 공격 범위·패턴 시각화 VFX 셰이더 애셋. 스킬 범위·위험 구역·공격 인디케이터를 직관적으로 표현할 수 있는 커스터마이징 가능한 이펙트를 제공합니다.</p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+          <iframe src="https://www.youtube.com/embed/ThD3eqbgFCg" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:4px;" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem;">
+          <div>
+            <div style="font-size:18px;font-weight:700;margin-bottom:4px;">All In One Spawn System</div>
+            <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;">Tools / Visual Scripting &nbsp;·&nbsp; $70 &nbsp;·&nbsp; 2026.06</div>
+          </div>
+          <a href="https://youtu.be/ijV-4agD8fk" target="_blank" style="font-size:12px;color:var(--accent);border:1px solid var(--tag-border);background:var(--tag-bg);padding:5px 12px;border-radius:2px;text-decoration:none;white-space:nowrap;font-family:'Space Mono',monospace;flex-shrink:0;">▶ 데모</a>
+        </div>
+        <p style="font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:1rem;">오브젝트 풀링·웨이브 스폰·ScriptableObject 구조를 통합한 스폰 시스템. Built-in·URP·HDRP 모두 지원하며 에디터에서 데이터 기반으로 설정 가능합니다.</p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+          <iframe src="https://www.youtube.com/embed/ijV-4agD8fk" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:4px;" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <div class="section-divider"></div>
@@ -1258,6 +1376,7 @@
       role: '개발자 (전체)',
       github: 'https://black-d-og.itch.io/living-in-research',
       githubLabel: 'itch.io에서 보기',
+      video: 'JULSox44on0',
       images: [
         'Living In Research/플레이1.png',
         'Living In Research/전투.gif',
@@ -1322,6 +1441,7 @@
       role: '팀장 · 게임 개발',
       github: 'https://github.com/xoxohoon01/Soul-Taker',
       githubLabel: 'xoxohoon01/Soul-Taker',
+      video: '1mh142gLbPI',
       desc: `게임 개발 부트캠프 최종 팀 프로젝트로, 우수상을 수상한 Unity 3D 모바일 어드벤처 RPG 게임입니다. 팀장으로 참여하여 전체적인 게임 시스템 설계와 구현을 담당했습니다.\n\n스토리 기반 퀘스트 시스템, 아이템·장비 파밍, FSM 기반 몬스터 AI, Object Pooling 성능 최적화, UGS(Unity Google Sheet) 데이터 관리, NavMesh 경로 탐색, Sprite Atlas를 통한 렌더링 최적화 등 다양한 Unity 심화 기술을 직접 설계하고 구현했습니다.`,
       features: ['스토리 & NPC 퀘스트', '아이템 & 장비 파밍', '스킬 시스템', '몬스터 전투', 'FSM 기반 AI', 'NavMesh 경로탐색', 'Object Pooling', 'UGS 데이터 관리', 'Sprite Atlas 최적화', '가중치 랜덤 뽑기'],
       stacks: [
@@ -1344,6 +1464,38 @@
         'Soul Taker/퀘스트 및 보상 1.gif',
         'Soul Taker/전투 2.gif',
         'Soul Taker/스킬 2.gif',
+      ],
+    },
+    corecatcher: {
+      title: 'Core Catcher',
+      subtitle: '탑뷰 로그라이트 슈터 — 코어를 수집해 배틀수트를 강화하라',
+      type: 'solo',
+      typeLabel: '개인 프로젝트',
+      period: '2025.12.01 — 2026.07.03',
+      role: '개발자 (전체)',
+      github: 'https://black-d-og.itch.io/core-catcher',
+      githubLabel: 'itch.io에서 보기',
+      video: 'McyaYTiczi4',
+      images: [
+        'Core Catcher/전투1.webp',
+        'Core Catcher/전투2.webp',
+        'Core Catcher/전투3.webp',
+        'Core Catcher/전투.png',
+        'Core Catcher/카드.png',
+        'Core Catcher/스킬트리.png',
+      ],
+      desc: `Unity 6 기반 탑뷰 로그라이트 슈터입니다. 미지의 힘이 응축된 물질 '코어'를 수집해 배틀수트를 강화하고 우주의 위협에 맞서는 아케이드 액션 게임으로, itch.io에 공개했습니다.\n\n이벤트 훅 기반 아티팩트 시스템, 크리티컬 3단계 시스템, ScriptableObject 기반 카드 데이터, 프로시저럴 바이옴 맵, 한국어/영어 로컬라이제이션까지 게임 시스템 전반을 직접 설계·구현했습니다.`,
+      features: ['카드 선택 레벨업', '아티팩트 시스템', '스킬 트리', '크리티컬 3단계', '군집 스폰', '바이옴 맵 생성', '로컬라이제이션', 'Object Pooling', 'FSM AI'],
+      stacks: [
+        { label: '언어 & 엔진', tags: [{ text: 'C#', cls: 'engine' }, { text: 'Unity 6', cls: 'engine' }, { text: 'URP', cls: 'engine' }] },
+        { label: '에셋 & 데이터', tags: [{ text: 'Addressables', cls: 'infra' }, { text: 'ScriptableObject', cls: 'infra' }, { text: 'Unity Localization', cls: 'infra' }] },
+        { label: '아키텍처', tags: [{ text: '싱글톤', cls: 'infra' }, { text: 'FSM', cls: 'infra' }, { text: '이벤트 훅', cls: 'infra' }, { text: 'Object Pooling', cls: '' }] },
+        { label: '버전관리', tags: [{ text: 'Git', cls: 'infra' }, { text: 'GitHub', cls: 'infra' }] },
+      ],
+      challenges: [
+        { title: '이벤트 훅 기반 아티팩트 시스템', desc: 'PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트를 정의하고 각 아티팩트가 IArtifactCardEffect 인터페이스를 구현해 구독. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 새 아티팩트를 코드 추가 없이 확장합니다.' },
+        { title: '크리티컬 시스템 & 중복 발동 방지', desc: '일반·슈퍼·울트라 3단계 크리티컬을 설계하고, 관통 탄환처럼 여러 적을 피격하더라도 hasFiredCritEvent 플래그로 탄환 인스턴스당 OnCritical 이벤트는 1회만 발동하도록 보장했습니다.' },
+        { title: '프로시저럴 바이옴 맵', desc: 'Noise 기반 바이옴 분포와 DetailRandomizer로 풀·나무 등 지형 디테일을 절차적으로 배치했습니다. 매 플레이마다 다른 환경이 생성됩니다.' },
       ],
     },
   };
@@ -1369,6 +1521,9 @@
     const galleryHTML = p.images && p.images.length
       ? `<div class="modal-section"><div class="modal-section-label">스크린샷</div><div class="modal-gallery">${p.images.map(src => `<img src="${src}" alt="" loading="lazy" onclick="openLightbox('${src.replace(/'/g, "\\'")}')"/>`).join('')}</div></div>`
       : '';
+    const videoHTML = p.video
+      ? `<div class="modal-section"><div class="modal-section-label">데모 영상</div><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;margin-top:8px;"><iframe src="https://www.youtube.com/embed/${p.video}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:4px;" allowfullscreen loading="lazy"></iframe></div></div>`
+      : '';
 
     document.getElementById('modalContent').innerHTML = `
       <div class="modal-tag-row">
@@ -1380,6 +1535,7 @@
       <div class="modal-subtitle">${p.subtitle}</div>
 
       ${galleryHTML}
+      ${videoHTML}
 
       <div class="modal-section">
         <div class="modal-section-label">프로젝트 소개</div>

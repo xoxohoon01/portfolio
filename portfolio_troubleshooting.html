@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이태훈 — 포트폴리오 + 트러블슈팅</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
+    font-size: 11pt;
+    color: #1a1a1a;
+    background: #f4f4f4;
+    line-height: 1.65;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: #fff;
+    padding: 16mm 18mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 2.5px solid #1a1a1a;
+    margin-bottom: 20px;
+  }
+  .header-left h1 { font-size: 30pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .header-left .tag {
+    display: inline-block; font-size: 8.5pt; color: #006b4f;
+    border: 1px solid #006b4f; padding: 2px 8px; border-radius: 2px;
+    letter-spacing: 0.08em; margin-top: 6px; font-weight: 500;
+  }
+  .header-right { text-align: right; font-size: 9pt; color: #555; line-height: 1.9; }
+  .header-right a { color: #555; text-decoration: none; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 28px; }
+  .section-title {
+    font-size: 9pt; font-weight: 700; color: #006b4f;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 16px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+  .about-text { font-size: 10pt; color: #333; line-height: 1.75; font-weight: 300; }
+  .about-text p + p { margin-top: 8px; }
+  .strength-list { display: flex; flex-direction: column; gap: 8px; }
+  .strength-item { border-left: 3px solid #006b4f; padding: 6px 10px; background: #f7faf9; }
+  .strength-title { font-size: 9.5pt; font-weight: 600; color: #006b4f; margin-bottom: 2px; }
+  .strength-desc { font-size: 8.5pt; color: #555; line-height: 1.5; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 16px; }
+  .skill-group-label {
+    font-size: 8.5pt; font-weight: 600; color: #555;
+    letter-spacing: 0.05em; margin-bottom: 5px; text-transform: uppercase;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .skill-tag { font-size: 8pt; padding: 2px 7px; border: 1px solid #ccc; border-radius: 2px; color: #444; }
+  .skill-tag.primary { border-color: #006b4f; color: #006b4f; font-weight: 500; background: #f0faf6; }
+
+  /* ── PROJECT BLOCK ── */
+  .project-block { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e8e8e8; }
+  .project-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .project-header-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .project-title { font-size: 14pt; font-weight: 700; letter-spacing: -0.01em; }
+  .project-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .badge { font-size: 7.5pt; padding: 2px 7px; border-radius: 2px; font-weight: 500; }
+  .badge.team { background: #ede9ff; color: #5e3fc8; border: 1px solid #c4b5fd; }
+  .badge.solo { background: #f0faf6; color: #006b4f; border: 1px solid #6ee7b7; }
+  .period { font-size: 8.5pt; color: #777; }
+  .role-text { font-size: 8.5pt; color: #777; }
+
+  .project-body { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: start; }
+  .project-desc { font-size: 9.5pt; color: #333; line-height: 1.85; font-weight: 300; margin-bottom: 12px; }
+  .feature-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .feature-tag { font-size: 7.5pt; padding: 2px 7px; border: 1px solid #ddd; border-radius: 2px; color: #555; }
+
+  /* ── CHALLENGES ── */
+  .challenge-item { border-left: 2px solid #006b4f; padding: 7px 11px; margin-bottom: 8px; background: #f7faf9; }
+  .challenge-item:last-child { margin-bottom: 0; }
+  .challenge-title { font-size: 9pt; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+  .challenge-desc { font-size: 9pt; color: #555; line-height: 1.6; }
+
+  /* ── 갤러리 ── */
+  .project-gallery-col { display: flex; flex-direction: column; gap: 5px; }
+  .project-gallery-col img {
+    width: 100%; height: auto; display: block;
+    border-radius: 2px; border: 1px solid #e0e0e0; object-fit: contain;
+  }
+  .project-gallery-row { display: flex; flex-direction: row; gap: 5px; }
+  .project-gallery-row img {
+    flex: 1; min-width: 0; height: auto; display: block;
+    border-radius: 2px; border: 1px solid #e0e0e0; object-fit: contain;
+  }
+
+  /* ── STACK ── */
+  .stack-section {
+    display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: flex-start;
+    margin-top: 10px; padding-top: 8px; border-top: 1px solid #ebebeb;
+  }
+  .stack-row { display: flex; align-items: baseline; gap: 5px; }
+  .stack-label-sm {
+    font-size: 7.5pt; font-weight: 600; color: #888;
+    letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+  .stack-tag { font-size: 7.5pt; padding: 1px 6px; border-radius: 2px; border: 1px solid #ddd; color: #555; }
+  .stack-tag.be { border-color: #bfdbfe; color: #1d4ed8; }
+  .stack-tag.fe { border-color: #c4b5fd; color: #5e3fc8; }
+  .stack-tag.infra { border-color: #6ee7b7; color: #065f46; }
+  .stack-tag.engine { border-color: #fcd34d; color: #92400e; }
+
+  /* ── AWARD ── */
+  .award-box {
+    display: flex; align-items: center; gap: 14px;
+    border: 1.5px solid #006b4f; padding: 12px 16px; border-radius: 4px; background: #f7faf9;
+  }
+  .award-icon { font-size: 24pt; flex-shrink: 0; }
+  .award-title { font-size: 12pt; font-weight: 700; margin-bottom: 3px; }
+  .award-desc { font-size: 9pt; color: #555; }
+  .award-badge {
+    margin-left: auto; font-size: 8pt; color: #006b4f; border: 1px solid #006b4f;
+    padding: 4px 10px; border-radius: 2px; white-space: nowrap; font-weight: 600; letter-spacing: 0.05em;
+  }
+
+  /* ── FOOTER ── */
+  .footer { margin-top: 24px; padding-top: 10px; border-top: 1px solid #ddd; text-align: center; font-size: 8.5pt; color: #888; }
+
+  /* ── PRINT BUTTON ── */
+  .print-btn { display: block; text-align: center; margin: 20px auto; }
+  .print-btn button {
+    padding: 10px 28px; background: #006b4f; color: #fff; border: none;
+    border-radius: 4px; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+  }
+  .print-btn button:hover { background: #005a42; }
+
+  /* ── TROUBLESHOOTING (인라인) ── */
+  .ts-title-inline {
+    font-size: 8.5pt; font-weight: 700; color: #006b4f;
+    letter-spacing: 0.13em; text-transform: uppercase;
+    border-bottom: 1px solid #ddd; padding-bottom: 4px; margin: 16px 0 10px;
+  }
+  .ts-item {
+    display: grid; grid-template-columns: 18px 1fr;
+    gap: 0 10px; margin-bottom: 8px; padding: 9px 11px;
+    border: 1px solid #e4e4e4; border-radius: 3px; background: #fafafa;
+  }
+  .ts-item:last-child { margin-bottom: 0; }
+  .ts-number { font-size: 9pt; font-weight: 700; color: #006b4f; padding-top: 1px; grid-row: 1 / 5; }
+  .ts-title { font-size: 9pt; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .ts-row { display: grid; grid-template-columns: 38px 1fr; gap: 2px 8px; margin-bottom: 4px; align-items: baseline; }
+  .ts-row:last-child { margin-bottom: 0; }
+  .ts-label { font-size: 7.5pt; font-weight: 700; color: #006b4f; letter-spacing: 0.04em; white-space: nowrap; padding-top: 1px; }
+  .ts-content { font-size: 8.5pt; color: #444; line-height: 1.6; }
+
+  /* ── PRINT ── */
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    body { background: #fff; }
+    .print-btn { display: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      padding: 11mm 13mm;
+      width: 210mm;
+      min-height: auto;
+      break-before: page;
+      page-break-before: always;
+    }
+    .page:first-of-type {
+      break-before: auto;
+      page-break-before: auto;
+    }
+    /* 인쇄 시 섹션 간격 축소 */
+    .section { margin-bottom: 14px; }
+    .section-title { margin-bottom: 8px; padding-bottom: 3px; }
+    .project-desc { margin-bottom: 7px; font-size: 8.5pt; }
+    .feature-tags { margin-bottom: 7px; }
+    .challenge-item { padding: 5px 9px; margin-bottom: 5px; }
+    .challenge-desc { font-size: 8pt; }
+    .stack-section { margin-top: 6px; padding-top: 5px; gap: 3px 14px; }
+    /* 인쇄 시 TS 항목 압축 */
+    .ts-title-inline { margin: 10px 0 7px; padding-bottom: 3px; font-size: 7.5pt; }
+    .ts-item { padding: 6px 9px; margin-bottom: 5px; gap: 0 8px; }
+    .ts-item:last-child { margin-bottom: 0; }
+    .ts-title { font-size: 8pt; margin-bottom: 4px; }
+    .ts-row { gap: 2px 6px; margin-bottom: 3px; }
+    .ts-label { font-size: 7pt; }
+    .ts-content { font-size: 7.5pt; line-height: 1.5; }
+    /* 페이지 내 요소 분리 방지 */
+    .ts-item { page-break-inside: avoid; break-inside: avoid; }
+    .project-gallery-col { page-break-inside: avoid; break-inside: avoid; }
+    .project-gallery-col img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .award-box { page-break-inside: avoid; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-btn">
+  <button onclick="window.print()">PDF로 저장 (Ctrl+P)</button>
+</div>
+
+<!-- ══ PAGE 1: 소개 + 기술 ══ -->
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>이태훈</h1>
+      <div class="tag">GAME DEVELOPER</div>
+    </div>
+    <div class="header-right">
+      <div>010-8220-3350</div>
+      <div><a href="mailto:xoxohoon01@gmail.com">xoxohoon01@gmail.com</a></div>
+      <div><a href="https://github.com/xoxohoon01">github.com/xoxohoon01</a></div>
+      <div>경기도 고양시 일산서구</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">About — 성장 과정 &amp; 강점</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>게임 개발 부트캠프 최종 팀 프로젝트로 <strong>Soul Taker</strong>를 진행했습니다. 배운 기술을 실제 팀 협업에서 적용하고 싶어 팀장을 맡았고, FSM 기반 몬스터 AI, Object Pooling, NavMesh, Sprite Atlas 최적화를 직접 구현하며 Unity 심화 기술과 팀 리딩 역량을 동시에 키웠습니다. 최종 <strong>우수상</strong>을 수상했습니다.</p>
+        <p style="margin-top:8px;">부트캠프 수료 후 개인 역량을 더 깊이 쌓고 싶어 <strong>Fortune Heroes</strong>를 시작했습니다. Addressables 동적 에셋 로딩, 제네릭 기반 UI 시스템(Show&lt;T&gt;/Hide&lt;T&gt;), UGS 데이터 관리를 혼자 설계·구현하며 Unity 아키텍처 이해와 자기주도 학습 능력을 길렀습니다.</p>
+        <p style="margin-top:8px;">게임 개발을 넘어 웹 백엔드도 경험하고 싶어 IoT·클라우드 과정에 참여했고, 최종 팀 프로젝트 <strong>Path Note</strong>에서 팀장·백엔드 개발자로 REST API 설계·명세서 작성, Spring Security + 카카오 OAuth2, AI 백엔드 서버, DB 설계를 담당했습니다.</p>
+        <p style="margin-top:8px;">Steam 출시를 목표로 <strong>Living In Research</strong>를 개발하며 P2P 멀티플레이어라는 고난도 기술에 도전했습니다. Steamworks + FacePunch + NGO 조합으로 P2P 구조를 직접 설계하고 NetworkList 기반 인벤토리 동기화, Grid 하우징 시스템을 구현하며 분산 시스템 이해를 심화했습니다.</p>
+        <p style="margin-top:8px;">itch.io에 공개한 <strong>Core Catcher</strong>를 개발하며 이벤트 훅 기반 아티팩트 시스템, 3단계 크리티컬 설계, 프로시저럴 바이옴 맵 등 로그라이트 핵심 메카닉을 직접 연구·구현했습니다. 개발 과정에서 분리·정제한 툴을 Unity Asset Store에 제작·등록해 실제 판매하는 경험까지 쌓았습니다.</p>
+      </div>
+      <div class="strength-list">
+        <div class="strength-item">
+          <div class="strength-title">프로그램 구조 이해</div>
+          <div class="strength-desc">C부터 Java까지 여러 언어를 통해 소프트웨어 공학적으로 학습. 코드 분석, 유지보수, 구조 설계에 강합니다.</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-title">리더십 &amp; 소통</div>
+          <div class="strength-desc">4번의 소규모 팀 프로젝트에서 팀장 역할. 역할 분담과 명확한 커뮤니케이션으로 우수상 수상.</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-title">클린 코드 지향</div>
+          <div class="strength-desc">명시적 주석, 재사용성 극대화. 코드 리뷰가 수월하고 유지보수에서 강점을 발휘합니다.</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-title">빠른 기술 흡수</div>
+          <div class="strength-desc">폭넓은 경험을 바탕으로 새로운 라이브러리와 디자인 패턴을 빠르게 학습하고 응용합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skills — 기술 스택</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">프로그래밍 언어</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">C#</span>
+          <span class="skill-tag primary">Java</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Kotlin</span>
+          <span class="skill-tag">HTML</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">게임 엔진</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Unity</span>
+          <span class="skill-tag">Game Maker</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">프레임워크</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">DOTween</span>
+          <span class="skill-tag primary">.NET Framework</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">NGO (Netcode)</span>
+          <span class="skill-tag">FacePunch</span>
+          <span class="skill-tag">Steamworks SDK</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">데이터 &amp; 인프라</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">JSON</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">REST API</span>
+          <span class="skill-tag">MVC 패턴</span>
+          <span class="skill-tag">TCP/IP</span>
+          <span class="skill-tag">PlayerPrefs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">협업 &amp; 프로젝트 관리</div>
+        <div class="skill-tags">
+          <span class="skill-tag primary">GitHub</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Canva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Award — 수상</div>
+    <div class="award-box">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">부트캠프 최종 프로젝트 우수상</div>
+        <div class="award-desc">게임 개발 부트캠프 팀 프로젝트 Soul Taker — Unity 3D 모바일 어드벤처 RPG 게임. 팀장으로 참여하여 우수상 수상.</div>
+      </div>
+      <div class="award-badge">EXCELLENCE AWARD</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ PAGE 2: Soul Taker ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Projects — 프로젝트</div>
+
+    <div class="project-block" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
+      <div class="project-header-row">
+        <div class="project-title">
+          Soul Taker
+          <span style="display:inline-block; font-size:8.5pt; font-weight:600; padding:2px 9px; background:#fef9c3; border:1px solid #fbbf24; border-radius:2px; color:#92400e; margin-left:8px; vertical-align:middle;">🏆 우수상</span>
+        </div>
+        <span class="period">2024.11.25 — 2025.01.16</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge team">팀 프로젝트</span>
+        <span class="role-text">팀장 · 게임 개발 · github.com/xoxohoon01/Soul-Taker &nbsp;·&nbsp; <a href="https://youtu.be/1mh142gLbPI" style="color:#777;">▶ 데모</a></span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">게임 개발 부트캠프 최종 팀 프로젝트로, <strong>우수상</strong>을 수상한 Unity 3D 모바일 어드벤처 RPG 게임입니다. 팀장으로 참여하여 전체적인 게임 시스템 설계와 구현을 담당했습니다. 스토리 기반 퀘스트 시스템, 아이템·장비 파밍, FSM 기반 몬스터 AI, Object Pooling 성능 최적화, UGS 데이터 관리, NavMesh 경로 탐색, Sprite Atlas 렌더링 최적화 등 Unity 심화 기술을 직접 구현했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">스토리 &amp; NPC 퀘스트</span>
+            <span class="feature-tag">아이템 &amp; 장비 파밍</span>
+            <span class="feature-tag">스킬 시스템</span>
+            <span class="feature-tag">몬스터 전투</span>
+            <span class="feature-tag">FSM 기반 AI</span>
+            <span class="feature-tag">NavMesh 경로탐색</span>
+            <span class="feature-tag">Object Pooling</span>
+            <span class="feature-tag">UGS 데이터 관리</span>
+            <span class="feature-tag">Sprite Atlas 최적화</span>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">FSM 기반 몬스터 AI</div>
+            <div class="challenge-desc">NavMesh의 CalculatePath로 플레이어 추적 가능 여부를 판단하고, PathComplete 상태 기준으로 SetPath/ResetPath를 전환해 다른 룸의 플레이어 오추적 문제를 해결했습니다.</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">Object Pooling 성능 최적화</div>
+            <div class="challenge-desc">Dictionary&lt;string, ObjectPool&lt;GameObject&gt;&gt; 구조로 다양한 오브젝트 풀을 통합 관리. GC 부하를 줄여 모바일 환경의 프레임 드랍을 방지했습니다.</div>
+          </div>
+          <div class="challenge-item" style="margin-bottom:0;">
+            <div class="challenge-title">Sprite Atlas 렌더링 최적화</div>
+            <div class="challenge-desc">다수의 UI 스프라이트를 Sprite Atlas로 묶어 드로우콜을 줄이고, 적용 전후 CPU 사용량을 비교 측정해 최적화 효과를 수치로 검증했습니다.</div>
+          </div>
+          <div class="stack-section">
+            <div class="stack-row">
+              <div class="stack-label-sm">언어 &amp; 엔진</div>
+              <div class="stack-tags">
+                <span class="stack-tag engine">C#</span>
+                <span class="stack-tag engine">Unity</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">데이터</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">UGS</span>
+                <span class="stack-tag infra">Google Sheets</span>
+                <span class="stack-tag infra">JSON</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">기술</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">FSM</span>
+                <span class="stack-tag infra">NavMesh</span>
+                <span class="stack-tag">Object Pooling</span>
+                <span class="stack-tag">Sprite Atlas</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">팀 구성</div>
+              <div class="stack-tags" style="font-size:7.5pt; color:#666;">이태훈(팀장·게임개발), 외 팀원</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-col">
+          <img src="Soul Taker/전투 1.gif" alt="Soul Taker 전투">
+          <img src="Soul Taker/스킬 1.gif" alt="Soul Taker 스킬">
+          <img src="Soul Taker/아이템 1.gif" alt="Soul Taker 아이템">
+        </div>
+      </div>
+
+      <!-- 커밋 기반 구현 내역 -->
+      <div style="margin-top:16px; padding-top:12px; border-top:1px solid #ebebeb;">
+        <div style="font-size:8pt; font-weight:600; color:#555; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">이태훈(팀장) 구현 내역 — GitHub 커밋 기반</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div style="background:#f7faf9; border-left:2px solid #006b4f; padding:7px 10px;">
+              <div style="font-size:8pt; font-weight:700; color:#006b4f; margin-bottom:4px;">전투 &amp; 캐릭터</div>
+              <div style="font-size:7.5pt; color:#444; line-height:1.6;">
+                <div>· <strong>대쉬 기능</strong> — 플레이어 구르기 이동, 애니메이터 컨디션 연결</div>
+                <div>· <strong>소울 기능</strong> — 몬스터 처치 시 소울 획득·사용 시스템</div>
+                <div>· <strong>스킬 시스템</strong> — 쿨타임 UI, 등록/해제 버튼, 레벨 0 자동 해제, 마나 소모</div>
+                <div>· <strong>몬스터 AI FSM</strong> — Idle/Chase/Attack/Dead 상태 전이, NavMesh 경로 검증</div>
+              </div>
+            </div>
+            <div style="background:#f7faf9; border-left:2px solid #006b4f; padding:7px 10px;">
+              <div style="font-size:8pt; font-weight:700; color:#006b4f; margin-bottom:4px;">씬 &amp; UX</div>
+              <div style="font-size:7.5pt; color:#444; line-height:1.6;">
+                <div>· <strong>씬 전환 로딩 화면</strong> — SceneManager 기반 비동기 로딩 UI 구현</div>
+                <div>· <strong>룸 클리어 방향 지시</strong> — 다음 룸 진입 방향 인디케이터</div>
+                <div>· <strong>메인메뉴 복귀</strong> — 인게임 → 타이틀 씬 복귀 플로우</div>
+                <div>· <strong>캐릭터 커스텀</strong> — 시작 씬 머테리얼 선택 후 게임에 적용</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div style="background:#f7faf9; border-left:2px solid #006b4f; padding:7px 10px;">
+              <div style="font-size:8pt; font-weight:700; color:#006b4f; margin-bottom:4px;">세이브 / 로드 (UGS)</div>
+              <div style="font-size:7.5pt; color:#444; line-height:1.6;">
+                <div>· <strong>아이템 장착 저장</strong> — 장착 장비 데이터를 UGS에 저장·로드</div>
+                <div>· <strong>캐릭터별 퀘스트 저장</strong> — 캐릭터 단위로 퀘스트 진행 상태 분리 저장</div>
+                <div>· <strong>설정 옵션 저장</strong> — 볼륨·카메라 회전속도 설정값 영속 저장</div>
+                <div>· <strong>가이드 열람 여부 저장</strong> — 최초 실행 시 튜토리얼 자동 표시 후 UGS 기록</div>
+              </div>
+            </div>
+            <div style="background:#f7faf9; border-left:2px solid #006b4f; padding:7px 10px;">
+              <div style="font-size:8pt; font-weight:700; color:#006b4f; margin-bottom:4px;">최적화 (커밋 확인)</div>
+              <div style="font-size:7.5pt; color:#444; line-height:1.6;">
+                <div>· <strong>Object Pooling</strong> — GC 부하 제거, CPU 55~70ms → 14ms</div>
+                <div>· <strong>Sprite Atlas (HUD)</strong> — HUD 스프라이트 통합, 드로우콜 감소</div>
+                <div>· <strong>Static Batching (로비)</strong> — 정적 오브젝트 배칭으로 렌더링 최적화</div>
+                <div>· <strong>던전 맵 최적화</strong> — 돌연변이 정원 씬 폴리곤·콜라이더 정리</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ PAGE 2-2: Soul Taker Troubleshooting ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Soul Taker — Troubleshooting</div>
+
+    <div class="ts-item" style="margin-bottom: 24px;">
+      <div class="ts-number">01</div>
+      <div class="ts-title">오디오 중첩 생성 오류</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">특정 이벤트(몬스터 처치, 아이템 획득 등) 발생 시 효과음이 여러 번 겹쳐 재생되거나 AudioSource 오브젝트가 씬에 중복 생성됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">Object Pool로 관리되는 오브젝트가 반환될 때 AudioSource의 Play 상태가 초기화되지 않아 재사용 시 기존 클립이 재생 중인 상태로 새 클립이 추가 재생됐습니다. 또한 이벤트 구독이 OnDestroy에서 해제되지 않아 씬 재진입 시 리스너가 중복 등록됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">ObjectPool의 OnRelease 콜백에서 AudioSource.Stop() 및 clip 초기화를 추가했습니다. 이벤트 구독은 OnEnable/OnDisable 쌍으로 관리해 씬 전환 시 중복 등록을 방지했습니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item" style="margin-bottom: 24px;">
+      <div class="ts-number">02</div>
+      <div class="ts-title">몬스터 다른 룸 오추적 버그</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">플레이어가 다른 룸에 있을 때 NavMesh 몬스터가 벽을 향해 계속 이동하거나 제자리에서 방향을 반복 전환하는 현상이 발생했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">NavMeshAgent.SetDestination이 경로 유효성 검증 없이 즉시 호출됐습니다. 룸 간 NavMesh 경로가 단절되어 있어도 SetDestination 자체는 실행되어 도달 불가능한 목적지를 향해 이동했습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">NavMesh.CalculatePath로 경로 유효성을 사전 검증하고, PathStatus == PathComplete인 경우에만 SetDestination을 호출하도록 수정했습니다. 경로가 불완전하면 Wander 상태로 전환합니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item" style="margin-bottom: 24px;">
+      <div class="ts-number">03</div>
+      <div class="ts-title">씬 전환 시 장착 아이템 스탯 초기화</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">로비에서 장비를 장착한 후 던전 씬으로 전환하면 장착 아이템의 추가 스탯(공격력, 방어력 등)이 BaseValue로 초기화됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">씬 전환 후 PlayerManager의 Awake에서 스탯을 BaseValue로 재초기화하는 로직이 실행됐습니다. 장착 아이템 데이터는 UGS에서 정상 로드됐지만 스탯 재적용 로직이 초기화 이후에 누락되어 있었습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">SceneManager.sceneLoaded 이벤트에서 장착 아이템 데이터를 불러와 스탯을 다시 적용하는 초기화 순서를 보장했습니다. Awake → 기본 스탯 설정 → sceneLoaded → 장착 스탯 누적 적용 순으로 정리했습니다.</div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-number">04</div>
+      <div class="ts-title">퀘스트 완료 시 보상 아이템 중복 지급</div>
+      <div class="ts-row">
+        <div class="ts-label">증상</div>
+        <div class="ts-content">퀘스트 완료 확인 버튼을 클릭할 때마다 보상 아이템이 중복으로 인벤토리에 추가됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">원인</div>
+        <div class="ts-content">완료 처리 함수에서 상태 전환 전에 보상 지급 로직이 실행됐고, 버튼 클릭 이벤트가 중복 등록되어 한 번의 클릭에 완료 함수가 여러 번 호출됐습니다.</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">해결</div>
+        <div class="ts-content">보상 지급 직전에 완료 상태 플래그를 먼저 설정해 재진입을 방지했습니다. 버튼 이벤트는 onClick.RemoveAllListeners() 후 단일 리스너만 등록하도록 수정했습니다.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══ PAGE 3: Fortune Heroes ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Projects — 프로젝트</div>
+
+    <div class="project-block" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
+      <div class="project-header-row">
+        <div class="project-title">Fortune Heroes</div>
+        <span class="period">2025.02.06 — 2025.03.06</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge solo">개인 프로젝트</span>
+        <span class="role-text">개발자 (전체) · github.com/xoxohoon01/Fortune-Hero</span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">Unity 2022 기반 3D 모바일 방치형 RPG 게임. 판타지 히어로즈·세븐나이츠를 레퍼런스로, Google Sheets(UGS)를 활용한 데이터 관리, Object Pooling 성능 최적화, Addressables 동적 에셋 로딩, 제네릭 기반 동적 UI 시스템 등 Unity 고급 기술을 학습하고 직접 구현했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">자동 전투 스테이지</span>
+            <span class="feature-tag">영웅 육성 &amp; 초월 강화</span>
+            <span class="feature-tag">아이템 파밍 &amp; 장착</span>
+            <span class="feature-tag">가중치 랜덤 뽑기</span>
+            <span class="feature-tag">Object Pooling</span>
+            <span class="feature-tag">UGS 데이터 관리</span>
+            <span class="feature-tag">Addressables</span>
+            <span class="feature-tag">동적 UI 생성</span>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">Object Pooling</div>
+            <div class="challenge-desc">Dictionary&lt;string, ObjectPool&lt;GameObject&gt;&gt; 구조로 다양한 오브젝트 풀을 통합 관리. GC 부하를 줄여 모바일 환경에서 성능을 최적화했습니다.</div>
+          </div>
+          <div class="challenge-item" style="margin-bottom:0;">
+            <div class="challenge-title">제네릭 동적 UI 시스템</div>
+            <div class="challenge-desc">UIBase를 기반으로 UIManager의 Show&lt;T&gt;/Hide&lt;T&gt; 메서드를 구현. 제네릭 타입 제약(where T : UIBase)으로 다양한 UI를 유연하게 관리합니다.</div>
+          </div>
+        </div>
+        <div class="stack-section" style="flex-direction:column; border-top:none; margin-top:0; padding-top:0;">
+          <div class="stack-row" style="flex-direction:column; align-items:flex-start; gap:3px;">
+            <div class="stack-label-sm">언어 &amp; 엔진</div>
+            <div class="stack-tags">
+              <span class="stack-tag engine">C#</span>
+              <span class="stack-tag engine">Unity 2022</span>
+            </div>
+          </div>
+          <div class="stack-row" style="flex-direction:column; align-items:flex-start; gap:3px; margin-top:6px;">
+            <div class="stack-label-sm">데이터</div>
+            <div class="stack-tags">
+              <span class="stack-tag infra">UGS</span>
+              <span class="stack-tag infra">Google Sheets</span>
+              <span class="stack-tag infra">JSON</span>
+            </div>
+          </div>
+          <div class="stack-row" style="flex-direction:column; align-items:flex-start; gap:3px; margin-top:6px;">
+            <div class="stack-label-sm">기술</div>
+            <div class="stack-tags">
+              <span class="stack-tag">Addressables</span>
+              <span class="stack-tag">Object Pooling</span>
+              <span class="stack-tag">제네릭 UI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-gallery-row" style="margin-top:10px;">
+        <img src="Fortune Hero/Equipment.png" alt="Fortune Heroes 장비" style="max-height:280px; object-fit:contain;">
+        <img src="Fortune Hero/Heros.png" alt="Fortune Heroes 영웅" style="max-height:280px; object-fit:contain;">
+        <img src="Fortune Hero/Stage2.gif" alt="Fortune Heroes 스테이지" style="max-height:280px; object-fit:contain;">
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
+
+      <div class="ts-item">
+        <div class="ts-number">01</div>
+        <div class="ts-title">모바일 세로모드 영웅 인벤토리 UI 깨짐</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">안드로이드 기기 세로 모드에서 영웅 인벤토리를 열면 UI 요소들이 화면 밖으로 벗어나거나 버튼·텍스트가 겹치는 레이아웃 깨짐이 발생했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">Canvas Scaler의 Reference Resolution이 가로(Landscape) 기준으로 설정되어 있었고, UI 요소들의 앵커가 절대 좌표로 고정되어 있었습니다. 세로 해상도(9:16)에서는 비율이 달라져 모든 요소의 위치가 틀어졌습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">Canvas Scaler의 Match 값을 Height 우선(0.8)으로 조정하고, 패널과 버튼의 앵커를 화면 비율 기반 상대 좌표로 변경해 해상도 독립적인 레이아웃을 구성했습니다.</div>
+        </div>
+      </div>
+
+      <div class="ts-item">
+        <div class="ts-number">02</div>
+        <div class="ts-title">인벤토리 갱신 시 성능 저하</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">인벤토리 화면을 열거나 아이템을 획득할 때 UI 갱신 시 순간적인 프레임 드랍이 발생했습니다. 아이템이 많아질수록 딜레이가 눈에 띄게 증가했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">인벤토리 갱신 시 기존 슬롯 오브젝트를 전부 Destroy 후 새로 Instantiate하는 방식으로 구현되어, 아이템 수가 늘어날수록 GC 부하와 오브젝트 생성 비용이 선형으로 증가했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">인벤토리 슬롯에 Object Pooling을 적용해 오브젝트를 재사용하도록 전환했습니다. 갱신 시 슬롯의 데이터(아이콘, 수량)만 업데이트하고 오브젝트 생성·삭제를 최소화했습니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ PAGE 4: Path Note ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Projects — 프로젝트</div>
+
+    <div class="project-block" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
+      <div class="project-header-row">
+        <div class="project-title">Path Note</div>
+        <span class="period">2025.08.13 — 2025.10.01</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge team">팀 프로젝트</span>
+        <span class="role-text">팀장 · 백엔드 개발자 · github.com/Team-115</span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">사용자가 데이트 및 여행 코스를 직접 설계하고 SNS처럼 공유할 수 있는 웹 플랫폼. 팀장 및 백엔드 개발자로서 REST API 설계·구현 및 명세서 작성, Spring Security 기반 카카오 소셜 로그인, 검색 필터링, AI 백엔드 서버 구축, DB 설계, 서비스 로직 전반을 담당했습니다. MVC 패턴과 트랜잭션 처리에 대한 실무 역량을 강화했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">코스 설계 &amp; 공유</span>
+            <span class="feature-tag">좋아요 &amp; 댓글</span>
+            <span class="feature-tag">찜 목록</span>
+            <span class="feature-tag">코스 추천</span>
+            <span class="feature-tag">카카오 로그인</span>
+            <span class="feature-tag">RESTful API</span>
+            <span class="feature-tag">MVC 패턴</span>
+            <span class="feature-tag">트랜잭션 처리</span>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">REST API 설계</div>
+            <div class="challenge-desc">Spring Boot 기반 RESTful API를 직접 설계하고 구현하며 HTTP 메서드·상태코드·응답 형식의 일관성을 맞추는 방법을 익혔습니다.</div>
+          </div>
+          <div class="challenge-item" style="margin-bottom:0;">
+            <div class="challenge-title">인증 구현</div>
+            <div class="challenge-desc">Spring Security + 카카오 OAuth2를 연동하여 소셜 로그인 플로우를 직접 구현하고, 세션 및 JWT 처리를 학습했습니다.</div>
+          </div>
+          <div class="stack-section">
+            <div class="stack-row">
+              <div class="stack-label-sm">Backend</div>
+              <div class="stack-tags">
+                <span class="stack-tag be">Java</span>
+                <span class="stack-tag be">Spring Boot</span>
+                <span class="stack-tag be">Spring Security</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">Frontend</div>
+              <div class="stack-tags">
+                <span class="stack-tag fe">React</span>
+                <span class="stack-tag fe">HTML</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">협업</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">Git</span>
+                <span class="stack-tag infra">GitHub</span>
+                <span class="stack-tag">Figma</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">팀 구성</div>
+              <div class="stack-tags" style="font-size:7.5pt; color:#666;">이태훈(팀장·BE), 장나영(FE), 정승호(FE/BE), 강진호(FE/BE)</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-col">
+          <img src="Path Note/Path Note - 데이트 코스 공유 플랫폼 웹 서비스.png" alt="Path Note 메인">
+          <img src="Path Note/Path-Note 구조도.png" alt="Path Note 구조도">
+          <img src="Path Note/Path-Note 백엔드.png" alt="Path Note 백엔드">
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
+
+      <div class="ts-item">
+        <div class="ts-number">01</div>
+        <div class="ts-title">CorsConfig 빈 충돌로 CORS 오류 발생</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">프론트엔드에서 API 호출 시 CORS 오류가 간헐적으로 발생했습니다. Spring Boot 기동 시 <code style="font-family:monospace; background:#f0f0f0; padding:0 3px; border-radius:2px;">expected single matching bean but found 2</code> 예외가 출력되며 서버가 비정상 상태로 뜨는 경우가 있었습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">SecurityConfig 내부에서 CORS 설정을 정의하면서, 별도로 작성한 CorsConfig 클래스도 CorsConfigurationSource 빈을 독립적으로 등록해 두 빈이 충돌했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">별도의 CorsConfig 클래스를 제거하고, SecurityConfig 내 httpSecurity.cors()에서 CORS 설정을 통합했습니다. 빈을 단일화해 충돌을 해소하고 허용 Origin·메서드·헤더를 명시적으로 지정했습니다.</div>
+        </div>
+      </div>
+
+      <div class="ts-item">
+        <div class="ts-number">02</div>
+        <div class="ts-title">Docker 환경 MySQL 초기화 타이밍 오류 → PostgreSQL 전환</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">Docker Compose 실행 시 Spring Boot 컨테이너가 DB에 연결하지 못하고 바로 종료됐습니다. init.sql이 실행되기 전에 JPA DDL이 동작하면서 테이블 충돌 오류도 발생했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">MySQL 컨테이너가 완전히 초기화되기 전에 Spring Boot가 DB 연결을 시도했습니다. depends_on은 컨테이너 시작 시점만 보장하고 DB 준비 완료를 보장하지 않아 init.sql 실행 전 연결이 이루어졌습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">DBMS를 PostgreSQL로 전환하고, depends_on에 healthcheck 조건을 추가해 DB가 완전히 기동된 이후 앱 컨테이너가 시작되도록 보장했습니다.</div>
+        </div>
+      </div>
+
+      <div class="ts-item">
+        <div class="ts-number">03</div>
+        <div class="ts-title">카카오 OAuth2 로그인 후 JWT 토큰 미발급</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">카카오 소셜 로그인 플로우를 완료해도 클라이언트가 JWT 토큰을 받지 못하고, 인증이 필요한 API 호출이 모두 401을 반환했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">OAuth2 로그인 성공 핸들러(AuthenticationSuccessHandler)에서 JWT를 생성하고 응답 헤더에 포함하는 로직이 누락되어 있었습니다. 임시 구현 상태로 소셜 로그인 자체는 완료됐지만 토큰 발급 단계가 연결되지 않았습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">성공 핸들러에서 JwtTokenProvider를 통해 액세스 토큰을 발급하고 응답 헤더(Authorization)에 포함했습니다. SecurityConfig의 CORS 설정에 Authorization 헤더를 exposedHeaders로 추가해 클라이언트에서 읽을 수 있도록 수정했습니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ PAGE 5: Living In Research + 수상 ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Projects — 프로젝트</div>
+
+    <div class="project-block">
+      <div class="project-header-row">
+        <div class="project-title">Living In Research</div>
+        <span class="period">2025.09.16 — 2025.10.31</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge solo">개인 프로젝트</span>
+        <span class="role-text">개발자 (전체) · black-d-og.itch.io/living-in-research &nbsp;·&nbsp; <a href="https://youtu.be/JULSox44on0" style="color:#777;">▶ 데모</a></span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">Unity 6 기반 멀티플레이어 크래프팅 생존 게임. Steamworks API와 FacePunch Transport, NGO를 활용한 P2P 방식 멀티플레이어 네트워킹을 구현했습니다. 스토리 아이템 수집, 자원 수집 및 아이템 제작, 기지 건설, 몬스터 전투, NPC 퀘스트 등 다양한 게임 콘텐츠를 포함하며 itch.io 출시를 목표로 개발했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">스토리 &amp; NPC 퀘스트</span>
+            <span class="feature-tag">자원 수집 &amp; 아이템 제작</span>
+            <span class="feature-tag">Grid 기지 건설</span>
+            <span class="feature-tag">몬스터 전투</span>
+            <span class="feature-tag">Steam P2P 멀티</span>
+            <span class="feature-tag">FSM AI</span>
+            <span class="feature-tag">네트워크 동기화 인벤토리</span>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">P2P 멀티플레이어 네트워킹</div>
+            <div class="challenge-desc">Steamworks API + FacePunch Transport + NGO를 조합해 Steam 친구 초대 기반 P2P 멀티플레이어를 구현. 로비 생성·참가·연결 플로우 전체를 직접 설계했습니다.</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-title">네트워크 동기화 인벤토리</div>
+            <div class="challenge-desc">NetworkList를 활용한 서버-클라이언트 인벤토리 동기화 구현. 아이템 추가·삭제·이동·제작 전 과정을 ServerRpc/ClientRpc 패턴으로 처리했습니다.</div>
+          </div>
+          <div class="challenge-item" style="margin-bottom:0;">
+            <div class="challenge-title">Grid 하우징 시스템</div>
+            <div class="challenge-desc">Raycast와 격자 스냅(SnapToGrid)을 이용한 블록 설치 판정 시스템 구현. 설치 가능 여부를 시각적 인디케이터로 즉시 피드백합니다.</div>
+          </div>
+          <div class="stack-section">
+            <div class="stack-row">
+              <div class="stack-label-sm">언어</div>
+              <div class="stack-tags"><span class="stack-tag engine">C#</span></div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">엔진 &amp; SDK</div>
+              <div class="stack-tags">
+                <span class="stack-tag engine">Unity 6</span>
+                <span class="stack-tag engine">Steamworks</span>
+                <span class="stack-tag engine">NGO</span>
+                <span class="stack-tag engine">FacePunch</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">아키텍처</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">싱글톤</span>
+                <span class="stack-tag infra">FSM</span>
+                <span class="stack-tag infra">P2P 네트워킹</span>
+                <span class="stack-tag">Object Pooling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-col">
+          <img src="Living In Research/플레이1.png" alt="Living In Research 플레이">
+          <img src="Living In Research/하우징2.jpg" alt="Living In Research 하우징">
+          <img src="Living In Research/전투.gif" alt="Living In Research 전투">
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
+
+      <div class="ts-item">
+        <div class="ts-number">01</div>
+        <div class="ts-title">호스트-클라이언트 간 애니메이션 미동기화</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">호스트 화면에서는 캐릭터의 이동·공격 애니메이션이 정상 재생됐지만, 클라이언트 화면에서는 해당 캐릭터가 T-포즈로 고정되거나 애니메이션이 전혀 갱신되지 않았습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">Animator.SetBool / SetTrigger 호출이 로컬에서만 실행됐습니다. NGO P2P 구조에서 애니메이션 파라미터 변경은 자동으로 네트워크에 전파되지 않아 호스트의 상태 변경이 클라이언트에 도달하지 못했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">애니메이션 상태 변경 시 ServerRpc → ClientRpc 순서로 모든 클라이언트에 파라미터를 브로드캐스트하도록 수정했습니다. RPC 방식이 NetworkAnimator보다 불필요한 동기화를 줄여 더 적합했습니다.</div>
+        </div>
+      </div>
+
+      <div class="ts-item">
+        <div class="ts-number">02</div>
+        <div class="ts-title">네트워크 아키텍처 전환 — P2P → Relay 시도 → P2P + RPC</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">P2P 방식에서 애니메이션·오디오 외에도 인벤토리 상태, 오브젝트 생성·파괴 등 다양한 동기화 문제가 연속 발생해 개별 수정만으로 근본 해결이 어렵다고 판단했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">초기 구조에서 게임 상태 변경을 모두 로컬에서 처리했고 네트워크 전파 패턴이 정의되어 있지 않았습니다. Unity Relay 서버 방식으로 전환을 시도했으나 설정 복잡도와 소규모 게임에 불필요한 서버 비용이 문제가 됐습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">Relay를 포기하고 Steamworks 기반 P2P 구조를 유지하면서, 모든 게임 상태 변경을 ServerRpc / ClientRpc 패턴으로 일원화했습니다. 호스트가 권위(authority)를 갖고 상태를 검증한 뒤 ClientRpc로 브로드캐스트하는 구조로 동기화 문제를 체계적으로 해결했습니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<!-- ══ PAGE 7: Core Catcher ══ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-title">Projects — 프로젝트</div>
+
+    <div class="project-block" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
+      <div class="project-header-row">
+        <div class="project-title">Core Catcher</div>
+        <span class="period">2025.12.01 — 2026.07.03</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge solo">개인 프로젝트</span>
+        <span class="role-text">개발자 (전체) · black-d-og.itch.io/core-catcher &nbsp;·&nbsp; <a href="https://youtu.be/McyaYTiczi4" style="color:#777;">▶ 데모</a></span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">Unity 6 기반 탑뷰 로그라이트 슈터. 미지의 힘이 응축된 물질 '코어'를 수집해 배틀수트를 강화하고 우주의 위협에 맞서는 아케이드 액션 게임. 이벤트 훅 기반 아티팩트 시스템, 크리티컬 3단계, ScriptableObject 카드 데이터, 프로시저럴 바이옴 맵, 한국어/영어 로컬라이제이션까지 게임 시스템 전반을 직접 설계·구현했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">카드 선택 레벨업</span>
+            <span class="feature-tag">아티팩트 시스템</span>
+            <span class="feature-tag">스킬 트리</span>
+            <span class="feature-tag">크리티컬 3단계</span>
+            <span class="feature-tag">군집 스폰</span>
+            <span class="feature-tag">바이옴 맵 생성</span>
+            <span class="feature-tag">로컬라이제이션</span>
+            <span class="feature-tag">Object Pooling</span>
+          </div>
+          <div class="challenge-list">
+            <div class="challenge-item">
+              <div class="challenge-title">이벤트 훅 기반 아티팩트 시스템</div>
+              <div class="challenge-desc">PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트를 정의하고 각 아티팩트가 IArtifactCardEffect 인터페이스를 구현해 구독. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 새 아티팩트를 코드 추가 없이 확장합니다.</div>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-title">크리티컬 시스템 &amp; 중복 발동 방지</div>
+              <div class="challenge-desc">일반·슈퍼·울트라 3단계 크리티컬을 설계하고, 관통 탄환처럼 여러 적을 피격하더라도 hasFiredCritEvent 플래그로 탄환 인스턴스당 OnCritical 이벤트는 1회만 발동하도록 보장했습니다.</div>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-title">프로시저럴 바이옴 맵</div>
+              <div class="challenge-desc">Noise 기반 바이옴 분포와 DetailRandomizer로 풀·나무 등 지형 디테일을 절차적으로 배치했습니다. 매 플레이마다 다른 환경이 생성됩니다.</div>
+            </div>
+          </div>
+          <div class="stack-section">
+            <div class="stack-row">
+              <div class="stack-label-sm">언어 &amp; 엔진</div>
+              <div class="stack-tags">
+                <span class="stack-tag engine">C#</span>
+                <span class="stack-tag engine">Unity 6</span>
+                <span class="stack-tag engine">URP</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">에셋 &amp; 데이터</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">Addressables</span>
+                <span class="stack-tag infra">ScriptableObject</span>
+                <span class="stack-tag infra">Unity Localization</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">아키텍처</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">싱글톤</span>
+                <span class="stack-tag infra">FSM</span>
+                <span class="stack-tag infra">이벤트 훅</span>
+                <span class="stack-tag">Object Pooling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-col">
+          <img src="Core Catcher/전투.png" alt="Core Catcher 전투">
+          <img src="Core Catcher/카드.png" alt="Core Catcher 레벨업 카드">
+          <img src="Core Catcher/스킬트리.png" alt="Core Catcher 스킬 트리">
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="ts-title-inline">Troubleshooting — 문제 해결</div>
+
+      <div class="ts-item">
+        <div class="ts-number">01</div>
+        <div class="ts-title">InvokeCritical 관통 탄환 중복 발동</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">관통 탄환이 여러 적을 연속 피격할 때 SharpEye 등 크리티컬 이벤트 트리거가 피격 수만큼 중복 발동됐습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">InvokeCritical 함수가 적마다 크리티컬 데미지를 재계산할 때마다 호출되어, 탄환 하나로 N명을 맞히면 OnCritical 이벤트가 N번 발동됐습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">BulletController에 hasFiredCritEvent 플래그를 추가해 탄환 인스턴스당 최초 1회만 OnCritical을 발동하도록 수정했습니다. 크리티컬 데미지 재계산과 이벤트 발동을 분리해 독립적으로 처리합니다.</div>
+        </div>
+      </div>
+
+      <div class="ts-item">
+        <div class="ts-number">02</div>
+        <div class="ts-title">아티팩트 결합도 — PlayerController 비대화</div>
+        <div class="ts-row">
+          <div class="ts-label">증상</div>
+          <div class="ts-content">아티팩트마다 PlayerController에 직접 이벤트를 구독하는 코드가 중복·산재해, 아티팩트가 늘어날수록 PlayerController가 비대해지고 결합도가 높아졌습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">원인</div>
+          <div class="ts-content">각 아티팩트 효과가 조건 분기문이나 직접 메서드 호출로 구현되어 PlayerController가 모든 아티팩트 로직을 알아야 했습니다.</div>
+        </div>
+        <div class="ts-row">
+          <div class="ts-label">해결</div>
+          <div class="ts-content">PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트 훅만 선언하고, 아티팩트는 IArtifactCardEffect 인터페이스를 구현해 독립적으로 구독·해제하도록 개선했습니다. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 PlayerController 수정 없이 새 아티팩트를 추가할 수 있습니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:16px;">
+    <div class="section-title">Unity Asset Store — 제작 판매</div>
+    <div style="display:flex; gap:14px; margin-top:8px;">
+      <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
+        <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">Simple Attack Indicator</div>
+        <div style="font-size:8pt; color:#666; margin-bottom:5px;">VFX / Shaders &nbsp;·&nbsp; $15 &nbsp;·&nbsp; 2026.04 &nbsp;·&nbsp; <a href="https://youtu.be/ThD3eqbgFCg" style="color:#666;">▶ 데모</a></div>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55;">URP 기반 공격 범위·패턴 시각화 VFX 셰이더 애셋. 스킬 범위·위험 구역·공격 인디케이터를 직관적으로 표현할 수 있는 커스터마이징 가능한 이펙트를 제공합니다.</p>
+      </div>
+      <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
+        <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">All In One Spawn System</div>
+        <div style="font-size:8pt; color:#666; margin-bottom:5px;">Tools / Visual Scripting &nbsp;·&nbsp; $70 &nbsp;·&nbsp; 2026.06 &nbsp;·&nbsp; <a href="https://youtu.be/ijV-4agD8fk" style="color:#666;">▶ 데모</a></div>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55;">오브젝트 풀링·웨이브 스폰·ScriptableObject 구조를 통합한 스폰 시스템. Built-in·URP·HDRP 모두 지원하며 에디터에서 데이터 기반으로 설정 가능합니다.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

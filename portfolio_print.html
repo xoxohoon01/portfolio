@@ -310,6 +310,7 @@
         <p>사람들에게 새로운 경험을 나눠주는 것이 목표이자 꿈입니다. 어린 시절 게임을 통해 새로운 경험의 가능성을 발견하고, 게임 개발을 시작하며 소프트웨어 세계에 입문했습니다.</p>
         <p>소프트웨어학과에서 C, C++, Java, Python, Kotlin 등 다양한 언어를 학습하며 컴퓨터 사고 능력을 키웠습니다. 이후 게임 개발 부트캠프에서 객체지향 프로그래밍, Unity 게임 개발, 팀 프로젝트 협업을 경험하며 팀장으로 우수상을 수상했습니다.</p>
         <p>빅데이터 기반 IoT 클라우드 서비스 교육을 통해 하드웨어 시스템 개발, 네트워킹, DBMS 등 기술 스펙트럼을 확장했으며 Java Spring Boot 기반 웹 서비스 백엔드 개발자로도 참여해 MVC 패턴, REST API, 트랜잭션 역량을 강화했습니다.</p>
+        <p style="margin-top:8px;">itch.io에 공개한 <strong>Core Catcher</strong>를 개발하며 이벤트 훅 기반 아티팩트 시스템, 3단계 크리티컬 설계, 프로시저럴 바이옴 맵 등 로그라이트 핵심 메카닉을 직접 연구·구현했습니다. 개발 과정에서 분리·정제한 툴을 Unity Asset Store에 제작·등록해 실제 판매하는 경험까지 쌓았습니다.</p>
       </div>
       <div class="strength-list">
         <div class="strength-item">
@@ -402,7 +403,7 @@
       </div>
       <div class="project-meta">
         <span class="badge team">팀 프로젝트</span>
-        <span class="role-text">팀장 · 게임 개발 · github.com/xoxohoon01/Soul-Taker</span>
+        <span class="role-text">팀장 · 게임 개발 · github.com/xoxohoon01/Soul-Taker &nbsp;·&nbsp; <a href="https://youtu.be/1mh142gLbPI" style="color:#777;">▶ 데모</a></span>
       </div>
       <div class="project-body">
         <div>
@@ -474,7 +475,7 @@
       </div>
       <div class="project-meta">
         <span class="badge solo">개인 프로젝트</span>
-        <span class="role-text">개발자 (전체) · black-d-og.itch.io/living-in-research</span>
+        <span class="role-text">개발자 (전체) · black-d-og.itch.io/living-in-research &nbsp;·&nbsp; <a href="https://youtu.be/JULSox44on0" style="color:#777;">▶ 데모</a></span>
       </div>
       <div class="project-body">
         <div>
@@ -658,6 +659,91 @@
       </div>
     </div>
 
+  </div>
+
+    <!-- Core Catcher -->
+    <div class="project-block">
+      <div class="project-header-row">
+        <div class="project-title">Core Catcher</div>
+        <span class="period">2025.12.01 — 2026.07.03</span>
+      </div>
+      <div class="project-meta">
+        <span class="badge solo">개인 프로젝트</span>
+        <span class="role-text">개발자 (전체) · black-d-og.itch.io/core-catcher &nbsp;·&nbsp; <a href="https://youtu.be/McyaYTiczi4" style="color:#777;">▶ 데모</a></span>
+      </div>
+      <div class="project-body">
+        <div>
+          <p class="project-desc">Unity 6 기반 탑뷰 로그라이트 슈터. 미지의 힘이 응축된 물질 '코어'를 수집해 배틀수트를 강화하고 우주의 위협에 맞서는 아케이드 액션 게임. 이벤트 훅 기반 아티팩트 시스템, 크리티컬 3단계, ScriptableObject 카드 데이터, 프로시저럴 바이옴 맵, 한국어/영어 로컬라이제이션까지 게임 시스템 전반을 직접 설계·구현했습니다.</p>
+          <div class="feature-tags">
+            <span class="feature-tag">카드 선택 레벨업</span>
+            <span class="feature-tag">아티팩트 시스템</span>
+            <span class="feature-tag">스킬 트리</span>
+            <span class="feature-tag">크리티컬 3단계</span>
+            <span class="feature-tag">군집 스폰</span>
+            <span class="feature-tag">바이옴 맵 생성</span>
+            <span class="feature-tag">로컬라이제이션</span>
+            <span class="feature-tag">Object Pooling</span>
+          </div>
+          <div class="challenge-list">
+            <div class="challenge-item">
+              <div class="challenge-title">이벤트 훅 기반 아티팩트 시스템</div>
+              <div class="challenge-desc">PlayerController에 OnHit·OnAttackHit·OnCritical 이벤트를 정의하고 각 아티팩트가 IArtifactCardEffect 인터페이스를 구현해 구독. Reflection(Activator.CreateInstance)으로 런타임 동적 생성해 새 아티팩트를 코드 추가 없이 확장합니다.</div>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-title">크리티컬 시스템 &amp; 중복 발동 방지</div>
+              <div class="challenge-desc">일반·슈퍼·울트라 3단계 크리티컬을 설계하고, 관통 탄환처럼 여러 적을 피격하더라도 hasFiredCritEvent 플래그로 탄환 인스턴스당 OnCritical 이벤트는 1회만 발동하도록 보장했습니다.</div>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-title">프로시저럴 바이옴 맵</div>
+              <div class="challenge-desc">Noise 기반 바이옴 분포와 DetailRandomizer로 풀·나무 등 지형 디테일을 절차적으로 배치했습니다. 매 플레이마다 다른 환경이 생성됩니다.</div>
+            </div>
+          </div>
+          <div class="stack-section">
+            <div class="stack-row">
+              <div class="stack-label-sm">언어 &amp; 엔진</div>
+              <div class="stack-tags">
+                <span class="stack-tag engine">C#</span>
+                <span class="stack-tag engine">Unity 6</span>
+                <span class="stack-tag engine">URP</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">에셋 &amp; 데이터</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">Addressables</span>
+                <span class="stack-tag infra">ScriptableObject</span>
+                <span class="stack-tag infra">Unity Localization</span>
+              </div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-label-sm">아키텍처</div>
+              <div class="stack-tags">
+                <span class="stack-tag infra">싱글톤</span>
+                <span class="stack-tag infra">FSM</span>
+                <span class="stack-tag infra">이벤트 훅</span>
+                <span class="stack-tag">Object Pooling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- ASSET STORE -->
+  <div class="section" style="margin-top:16px;">
+    <div class="section-title">Unity Asset Store — 제작 판매</div>
+    <div style="display:flex; gap:14px; margin-top:8px;">
+      <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
+        <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">Simple Attack Indicator</div>
+        <div style="font-size:8pt; color:#666; margin-bottom:5px;">VFX / Shaders &nbsp;·&nbsp; $15 &nbsp;·&nbsp; 2026.04 &nbsp;·&nbsp; <a href="https://youtu.be/ThD3eqbgFCg" style="color:#666;">▶ 데모</a></div>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55;">URP 기반 공격 범위·패턴 시각화 VFX 셰이더 애셋. 스킬 범위·위험 구역·공격 인디케이터를 직관적으로 표현할 수 있는 커스터마이징 가능한 이펙트를 제공합니다.</p>
+      </div>
+      <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
+        <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">All In One Spawn System</div>
+        <div style="font-size:8pt; color:#666; margin-bottom:5px;">Tools / Visual Scripting &nbsp;·&nbsp; $70 &nbsp;·&nbsp; 2026.06 &nbsp;·&nbsp; <a href="https://youtu.be/ijV-4agD8fk" style="color:#666;">▶ 데모</a></div>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55;">오브젝트 풀링·웨이브 스폰·ScriptableObject 구조를 통합한 스폰 시스템. Built-in·URP·HDRP 모두 지원하며 에디터에서 데이터 기반으로 설정 가능합니다.</p>
+      </div>
+    </div>
   </div>
 
   <!-- AWARD -->
