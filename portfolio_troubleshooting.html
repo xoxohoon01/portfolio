@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이태훈 — 포트폴리오 + 트러블슈팅</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
+    font-family: 'Pretendard', '맑은 고딕', sans-serif;
     font-size: 11pt;
     color: #1a1a1a;
     background: #f4f4f4;
@@ -209,8 +209,6 @@
     img[src$=".gif"] { display: none; }
     /* 디테일 컷 이미지 제외 (PDF 용량 절감) */
     img[src*="디테일"] { display: none; }
-    /* Noto Sans KR 임베드 방지 — 시스템 폰트 사용 */
-    body, * { font-family: '맑은 고딕', 'Apple SD Gothic Neo', sans-serif !important; }
   }
 </style>
 </head>
@@ -414,9 +412,9 @@
           </div>
         </div>
         <div class="project-gallery-col">
-          <img src="Soul Taker/전투 1.gif" alt="Soul Taker 전투">
-          <img src="Soul Taker/스킬 1.gif" alt="Soul Taker 스킬">
-          <img src="Soul Taker/아이템 1.gif" alt="Soul Taker 아이템">
+          <img src="Soul Taker/전투1.jpg" alt="Soul Taker 전투">
+          <img src="Soul Taker/아이템1.jpg" alt="Soul Taker 아이템1">
+          <img src="Soul Taker/아이템2.jpg" alt="Soul Taker 아이템2">
         </div>
       </div>
 
@@ -585,9 +583,13 @@
             <div class="challenge-title">Object Pooling</div>
             <div class="challenge-desc">Dictionary&lt;string, ObjectPool&lt;GameObject&gt;&gt; 구조로 다양한 오브젝트 풀을 통합 관리. GC 부하를 줄여 모바일 환경에서 성능을 최적화했습니다.</div>
           </div>
-          <div class="challenge-item" style="margin-bottom:0;">
+          <div class="challenge-item">
             <div class="challenge-title">제네릭 동적 UI 시스템</div>
             <div class="challenge-desc">UIBase를 기반으로 UIManager의 Show&lt;T&gt;/Hide&lt;T&gt; 메서드를 구현. 제네릭 타입 제약(where T : UIBase)으로 다양한 UI를 유연하게 관리합니다.</div>
+          </div>
+          <div class="challenge-item" style="margin-bottom:0;">
+            <div class="challenge-title">가중치 랜덤 뽑기</div>
+            <div class="challenge-desc">누적합 배열로 O(log n) 이진 탐색 뽑기를 구현. 확률 테이블을 ScriptableObject로 분리해 코드 수정 없이 밸런스를 조정할 수 있습니다.</div>
           </div>
         </div>
         <div class="stack-section" style="flex-direction:column; border-top:none; margin-top:0; padding-top:0;">
@@ -619,7 +621,7 @@
       <div class="project-gallery-row" style="margin-top:10px;">
         <img src="Fortune Hero/Equipment.png" alt="Fortune Heroes 장비" style="max-height:280px; object-fit:contain;">
         <img src="Fortune Hero/Heros.png" alt="Fortune Heroes 영웅" style="max-height:280px; object-fit:contain;">
-        <img src="Fortune Hero/Stage2.gif" alt="Fortune Heroes 스테이지" style="max-height:280px; object-fit:contain;">
+        <img src="Fortune Hero/Combat.jpg" alt="Fortune Heroes 전투" style="max-height:280px; object-fit:contain;">
       </div>
 
       <!-- Troubleshooting -->
@@ -865,7 +867,7 @@
         <div class="project-gallery-col">
           <img src="Living In Research/플레이1.png" alt="Living In Research 플레이">
           <img src="Living In Research/하우징2.jpg" alt="Living In Research 하우징">
-          <img src="Living In Research/전투.gif" alt="Living In Research 전투">
+          <img src="Living In Research/전투.jpg" alt="Living In Research 전투">
         </div>
       </div>
 
@@ -1043,7 +1045,11 @@
       <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
         <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">Simple Attack Indicator</div>
         <div style="font-size:8pt; color:#666; margin-bottom:5px;">VFX / Shaders &nbsp;·&nbsp; $15 &nbsp;·&nbsp; 2026.04 &nbsp;·&nbsp; <a href="https://youtu.be/ThD3eqbgFCg" style="color:#666;">▶ 데모</a></div>
-        <p style="font-size:8.5pt; color:#333; line-height:1.55; margin-bottom:8px;">URP 기반 공격 범위·패턴 시각화 VFX 셰이더 애셋. <strong>Round Indicator Shader</strong>로 원형·도넛·반원·부채꼴·호 인디케이터, <strong>Box Indicator Shader</strong>로 직사각형·정사각형 인디케이터를 제작할 수 있습니다. 공격 타이밍 애니메이션을 쉽게 구현할 수 있으며, 단일 이미지만으로도 다양한 애니메이션 표현이 가능합니다.</p>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55; margin-bottom:6px;">Core Catcher 개발 중 공격 범위 표시용으로 직접 제작한 URP 셰이더를 애셋으로 분리·등록했습니다. <strong>Box</strong>와 <strong>Round</strong> 두 종류의 Indicator Shader로 구성되며, Inspector 파라미터 조작만으로 원하는 형태를 즉시 구현할 수 있습니다.</p>
+        <div style="margin-bottom:8px; font-size:7.5pt; color:#555; line-height:1.65;">
+          <div><strong style="color:#b45309;">Box Indicator</strong> — <strong>직사각형·정사각형.</strong> Width / Height를 자유롭게 조절해 원하는 크기의 사각형 인디케이터를 제작.</div>
+          <div><strong style="color:#b45309;">Round Indicator</strong> — <strong>원형·반원형·부채꼴·아치형</strong> 등 Angle·Inner Radius 파라미터로 다양한 형태를 자유롭게 조절.</div>
+        </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
           <img src="Asset Store/Simple Attack Indicator/디테일1.png" alt="SAI 디테일 1" style="width:100%; height:auto; border-radius:2px; display:block;">
           <img src="Asset Store/Simple Attack Indicator/디테일2.png" alt="SAI 디테일 2" style="width:100%; height:auto; border-radius:2px; display:block;">
@@ -1052,13 +1058,12 @@
       <div style="flex:1; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
         <div style="font-weight:700; font-size:10.5pt; margin-bottom:3px;">All In One Spawn System</div>
         <div style="font-size:8pt; color:#666; margin-bottom:5px;">Tools / Visual Scripting &nbsp;·&nbsp; $70 &nbsp;·&nbsp; 2026.06 &nbsp;·&nbsp; <a href="https://youtu.be/ijV-4agD8fk" style="color:#666;">▶ 데모</a></div>
-        <p style="font-size:8.5pt; color:#333; line-height:1.55; margin-bottom:6px;">ScriptableObject 기반 모듈형 데이터 드리븐 스폰 프레임워크. 코드 없이 에디터에서 모든 설정·미리보기가 가능하며 씬 뷰 기즈모로 스폰 영역을 직접 시각화합니다. Built-in·URP·HDRP 전체 지원. Unity 2022.3+</p>
+        <p style="font-size:8.5pt; color:#333; line-height:1.55; margin-bottom:6px;">Core Catcher의 스폰 시스템을 범용 툴로 재설계해 등록한 ScriptableObject 기반 모듈형 스폰 프레임워크. 스폰 규칙을 4가지 카테고리로 조합해 코드 없이 다양한 스폰 로직을 구성할 수 있으며, <strong>전용 에디터 윈도우에서 노드 그래프 형태로 스폰 규칙을 시각적으로 설계</strong>할 수 있는 것이 핵심 강점입니다.</p>
         <div style="margin-bottom:8px; font-size:7.5pt; color:#555; line-height:1.65;">
-          <div><strong style="color:#006b4f;">스폰 메서드</strong> — Position, Random Area, Cluster (지면 스냅·장애물 회피)</div>
-          <div><strong style="color:#006b4f;">스폰 빈도</strong> — One-Shot, Interval, Random Interval, Chain</div>
-          <div><strong style="color:#006b4f;">스폰 조건</strong> — Active Count, Chance, Distance, NavMesh, Trigger Volume, Visibility, Light Level, Component Field, Parameter, Terrain Layer</div>
-          <div><strong style="color:#006b4f;">후처리</strong> — Children 스폰, Animator 파라미터 설정, Physics 힘 적용, Spawn Callback</div>
-          <div><strong style="color:#006b4f;">오브젝트 풀링</strong> — 자동 풀 생성, Prewarm, 씬 전환 유지(DontDestroyOnLoad)</div>
+          <div><strong style="color:#b45309;">스폰 메서드</strong> — <strong>Position, Random Area, Cluster</strong> 등 오브젝트 배치 방식 선택</div>
+          <div><strong style="color:#b45309;">스폰 빈도</strong> — <strong>간격·횟수·시간 기반</strong> 등 스폰 타이밍 제어</div>
+          <div><strong style="color:#b45309;">스폰 조건</strong> — <strong>Active Count, Chance, Distance, NavMesh Valid, Trigger</strong> 外 다수</div>
+          <div><strong style="color:#b45309;">후처리</strong> — <strong>스폰 후 오브젝트에 적용할 초기화·이벤트 처리</strong> 설정</div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
           <img src="Asset Store/All In One Spawn System/디테일1.png" alt="AIOS 디테일 1" style="width:100%; height:auto; border-radius:2px; display:block;">
@@ -1068,11 +1073,9 @@
         </div>
       </div>
     </div>
-    <div style="margin-top:9px; font-size:8pt; color:#444; line-height:1.6;">
-      Unity Publisher Portal 판매 실적 — 두 애셋 합산 <strong>$117.50 매출</strong>, <strong>판매 10건</strong>, <strong>페이지뷰 547회</strong>, <strong>위시리스트 7건</strong>
-    </div>
-    <div style="margin-top:8px;">
-      <img src="Asset Store/분석.png" alt="Asset Store 판매 분석" style="width:100%; height:auto; border-radius:3px; border:1px solid #ddd; display:block;">
+    <div style="margin-top:10px; border:1px solid #ddd; border-radius:4px; padding:11px 13px;">
+      <img src="Asset Store/분석.png" alt="Asset Store 판매 분석" style="width:100%; height:auto; border-radius:3px; border:1px solid #ddd; display:block; margin-bottom:10px;">
+      <p style="font-size:10pt; color:#444; line-height:1.7; margin:0;">Unity Asset Store 퍼블리셔 대시보드 기준 누적 매출 <strong style="color:#1a1a1a;">$117.50</strong>, 판매 <strong style="color:#1a1a1a;">10건</strong>, 페이지뷰 <strong style="color:#1a1a1a;">547회</strong>, 위시리스트 <strong style="color:#1a1a1a;">7건</strong>을 기록했습니다. 출시 첫 달 Simple Attack Indicator($15)로 초기 판매를 확인한 후, All In One Spawn System($70)을 추가 출시해 단가 높은 툴 판매로 전환했습니다. 현재도 판매가 진행 중이며 추가 애셋 개발 및 등록을 계획 중입니다.</p>
     </div>
   </div>
 
