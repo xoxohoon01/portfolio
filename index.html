@@ -1261,7 +1261,7 @@
     <p style="font-size:15px;color:#d0d0d0;margin-bottom:2.5rem;line-height:1.8;">Core Catcher 개발 과정에서 분리·정제한 유틸리티를 Unity Asset Store에 제작·등록해 실제 판매합니다.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;">
 
-      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;">
+      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;display:flex;flex-direction:column;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem;">
           <div>
             <div style="font-size:18px;font-weight:700;margin-bottom:4px;">Simple Attack Indicator</div>
@@ -1270,12 +1270,16 @@
           <a href="https://youtu.be/ThD3eqbgFCg" target="_blank" style="font-size:12px;color:var(--accent);border:1px solid var(--tag-border);background:var(--tag-bg);padding:5px 12px;border-radius:2px;text-decoration:none;white-space:nowrap;font-family:'Space Mono',monospace;flex-shrink:0;">▶ 데모</a>
         </div>
         <p style="font-size:14px;color:#d0d0d0;line-height:1.7;margin-bottom:0.75rem;">URP 기반 공격 범위·패턴 시각화 VFX 셰이더 애셋. <strong style="color:var(--accent)">Round Indicator Shader</strong>로 원형·도넛·반원·부채꼴·호 인디케이터, <strong style="color:var(--accent)">Box Indicator Shader</strong>로 직사각형·정사각형 인디케이터를 제작할 수 있습니다. 공격 타이밍 애니메이션을 쉽게 구현할 수 있으며, 단일 이미지만으로도 다양한 애니메이션 표현이 가능합니다.</p>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:0.75rem;">
+          <img src="Asset Store/Simple Attack Indicator/디테일1.png" alt="SAI 디테일 1" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+          <img src="Asset Store/Simple Attack Indicator/디테일2.png" alt="SAI 디테일 2" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+        </div>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;margin-top:auto;">
           <iframe src="https://www.youtube.com/embed/ThD3eqbgFCg" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:4px;" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;">
+      <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:4px;padding:1.5rem;display:flex;flex-direction:column;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem;">
           <div>
             <div style="font-size:18px;font-weight:700;margin-bottom:4px;">All In One Spawn System</div>
@@ -1291,11 +1295,21 @@
           <div><span style="color:var(--accent);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;">후처리</span> &nbsp;— Children 스폰, Animator 파라미터, Physics 힘 적용, Spawn Callback</div>
           <div><span style="color:var(--accent);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;">오브젝트 풀링</span> &nbsp;— 자동 풀 생성, Prewarm, 씬 전환 유지 (DontDestroyOnLoad)</div>
         </div>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:0.75rem;">
+          <img src="Asset Store/All In One Spawn System/디테일1.png" alt="AIOS 디테일 1" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+          <img src="Asset Store/All In One Spawn System/디테일2.png" alt="AIOS 디테일 2" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+          <img src="Asset Store/All In One Spawn System/디테일3.png" alt="AIOS 디테일 3" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+          <img src="Asset Store/All In One Spawn System/디테일4.png" alt="AIOS 디테일 4" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;height:auto;border-radius:2px;cursor:pointer;display:block;">
+        </div>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;margin-top:auto;">
           <iframe src="https://www.youtube.com/embed/ijV-4agD8fk" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:4px;" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
+    </div>
+    <div style="margin-top:1.5rem;">
+      <div style="font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.06em;margin-bottom:0.5rem;text-transform:uppercase;">Publisher Analytics</div>
+      <img src="Asset Store/분석.png" alt="Asset Store 판매 분석" loading="lazy" onclick="openLightbox(this.src)" style="width:100%;border-radius:4px;cursor:pointer;border:1px solid var(--border);display:block;">
     </div>
   </div>
 </section>
