@@ -205,6 +205,8 @@
     .project-gallery-col { page-break-inside: avoid; break-inside: avoid; }
     .project-gallery-col img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .award-box { page-break-inside: avoid; break-inside: avoid; }
+    /* GIF는 PDF에서 모든 프레임이 임베드되어 용량 급증 — 인쇄 시 제외 */
+    img[src$=".gif"] { display: none; }
   }
 </style>
 </head>
